@@ -294,6 +294,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="52dp"
+            android:onClick="clickImage"
             app:layout_constraintEnd_toEndOf="@+id/petImage"
             app:layout_constraintStart_toStartOf="@+id/petImage"
             app:layout_constraintTop_toTopOf="@+id/petImage" />
@@ -302,7 +303,7 @@
     <ImageView
         android:id="@+id/petImage"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="163dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
