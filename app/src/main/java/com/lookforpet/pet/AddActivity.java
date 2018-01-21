@@ -81,6 +81,8 @@ public class AddActivity extends AppCompatActivity {
         tv=(TextView)findViewById(R.id.systemData);
         tv.setText(String.valueOf(s.toString()));
 
+
+
     }
     //取得相片後返回的監聽式
     @Override
@@ -95,5 +97,10 @@ public class AddActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void clickOk(View v)
+    {
+        Intent it=new Intent(AddActivity.this,CheckActivity.class);
+        startActivity(it);
     }
 }
