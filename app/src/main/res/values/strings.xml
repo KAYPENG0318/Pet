@@ -13,4 +13,14 @@
         <item>中</item>
         <item>小</item>
     </string-array>
+
+    <string name="mainName">
+        尋找汪喵星人
+    </string>
+    <string name="mainText1">
+        *定期二個月會自動刪除資訊，如有需要請自行再更新。
+    </string>
+    <string name="mainText2">
+        *請勿新增非找尋貓貓狗狗失蹤資訊，發現一律刪除。
+    </string>
 </resources>

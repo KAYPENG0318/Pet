@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Intent it=new Intent(MainActivity.this,AddActivity.class);
         startActivity(it);
     }
-//    public void buttonInquire(View v)
-//    {
-//        Intent it=new Intent(MainActivity.this,InquireActivity.class);
-//        startActivity(it);
-//    }
+    public void buttonInquire(View v)
+    {
+        Intent it=new Intent(MainActivity.this,InquireActivity.class);
+        startActivity(it);
+    }
 }

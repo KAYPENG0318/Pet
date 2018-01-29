@@ -75,7 +75,7 @@ public class AddActivity extends AppCompatActivity {
                 R.array.type,android.R.layout.simple_spinner_dropdown_item);
         sptype.setAdapter(choosetype);
 
-
+        //顯示填單日期
         Calendar mCal = Calendar.getInstance();
         CharSequence s = DateFormat.format("yyyy-MM-dd", mCal.getTime());    // kk:24小時制, hh:12小時制
         tv=(TextView)findViewById(R.id.systemData);
@@ -84,6 +84,8 @@ public class AddActivity extends AppCompatActivity {
 
 
     }
+
+
     //取得相片後返回的監聽式
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

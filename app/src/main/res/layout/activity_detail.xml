@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
     tools:context="com.lookforpet.pet.DetailActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/systemDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,8 +30,8 @@
         android:longClickable="false"
         android:text="哈囉!"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/systemDate"
+        app:layout_constraintTop_toTopOf="@+id/systemDate" />
 
     <TextView
         android:id="@+id/textView3"
@@ -40,7 +41,7 @@
         android:layout_marginTop="32dp"
         android:text="種類："
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/systemDate" />
 
     <TextView
         android:id="@+id/petKind"
@@ -145,16 +146,16 @@
 
     <TextView
         android:id="@+id/petAddress"
-        android:layout_width="256dp"
+        android:layout_width="287dp"
         android:layout_height="39dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="1111"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petCity" />
 
@@ -222,7 +223,7 @@
 
     <TextView
         android:id="@+id/ownerLine"
-        android:layout_width="120dp"
+        android:layout_width="129dp"
         android:layout_height="41dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
@@ -276,17 +277,26 @@
         app:layout_constraintTop_toTopOf="@+id/textView14" />
 
     <Button
-        android:id="@+id/buttonMain"
+        android:id="@+id/buttonSend"
         android:layout_width="112dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:onClick="buttonMain"
-        android:text="首頁"
+        android:onClick="buttonSend"
+        android:text="送出"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ownerEmail" />
 
-
-
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="112dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="buttonBack"
+        android:text="修改"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSend"
+        app:layout_constraintStart_toEndOf="@+id/systemData"
+        app:layout_constraintTop_toBottomOf="@+id/ownerEmail" />
 
 
     <ImageView
