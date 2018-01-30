@@ -14,16 +14,22 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.lookforpet.pet.data.PetData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
-
+    EditText petName,petKind,petAge;
+    String name ;
+    String kind ;
+    String age ;
 
 
     private File tempFile;
@@ -100,10 +106,36 @@ public class AddActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+    //填好資料送到確定頁
     public void clickOk(View v)
     {
-        Intent it=new Intent(AddActivity.this,CheckActivity.class);
+
+        name = petName.getText().toString();
+        kind = petKind.getText().toString();
+        age = petAge.getText().toString();
+
+//        //再按一次就在arraylist 新增一筆 PetData
+        if( MainActivity.dao.getList().size()>0)
+        {
+            //先arraylist 裡拿掉 物件
+            MainActivity.dao.getList().remove(0);
+            //在 arraylist  增加一筆物件
+            MainActivity.dao.add(new PetData(name, kind, age));
+        }else{
+            //有資料在 listarray裡了
+            MainActivity.dao.add(new PetData(name, kind, age));
+        }
+
+        Log.d("","AddActivity----"+MainActivity.dao.getList().size());
+
+        //資料送到  CheckActivity
+        Intent it = new Intent(AddActivity.this, CheckActivity.class);
+        //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+        //MainActivity.dao.getList().get(0).petName
+        it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
         startActivity(it);
+
+
     }
 
 }

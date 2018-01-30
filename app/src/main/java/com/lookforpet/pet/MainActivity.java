@@ -9,7 +9,11 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.lookforpet.pet.data.PetDAO;
+
 public class MainActivity extends AppCompatActivity {
+    //靜態變數
+    final public static PetDAO dao= new PetDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +30,14 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent it=new Intent(MainActivity.this,AddActivity.class);
         startActivity(it);
+        //新增 20180130
+        finish();
     }
     public void buttonInquire(View v)
     {
         Intent it=new Intent(MainActivity.this,InquireActivity.class);
         startActivity(it);
+        //新增 20180130
+        finish();
     }
 }
