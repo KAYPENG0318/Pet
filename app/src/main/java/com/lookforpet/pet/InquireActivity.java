@@ -28,9 +28,9 @@ public class InquireActivity extends AppCompatActivity {
         spsex.setAdapter(choosesex);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        finish();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        finish();
+//    }
 }

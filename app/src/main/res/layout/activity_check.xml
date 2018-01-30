@@ -281,20 +281,20 @@
         android:layout_width="112dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:onClick="buttonSend"
         android:text="送出"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toBottomOf="@+id/ownerEmail" />
 
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="112dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="buttonBack"
         android:text="修改"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSend"
         app:layout_constraintStart_toEndOf="@+id/systemData"
         app:layout_constraintTop_toBottomOf="@+id/ownerEmail" />
 
