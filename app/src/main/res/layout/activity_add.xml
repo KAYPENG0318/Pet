@@ -295,6 +295,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="52dp"
+            android:onClick="petButton"
             app:layout_constraintEnd_toEndOf="@+id/petImage"
             app:layout_constraintStart_toStartOf="@+id/petImage"
             app:layout_constraintTop_toTopOf="@+id/petImage" />

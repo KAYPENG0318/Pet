@@ -105,4 +105,5 @@ public class AddActivity extends AppCompatActivity {
         Intent it=new Intent(AddActivity.this,CheckActivity.class);
         startActivity(it);
     }
+
 }
