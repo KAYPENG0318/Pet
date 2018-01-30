@@ -13,4 +13,5 @@ public class InquireActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_inquire);
     }
+
 }

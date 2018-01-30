@@ -23,8 +23,8 @@ import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
-    TextView tv;
-    Button bt1;
+
+
 
     private File tempFile;
     @Override
@@ -35,7 +35,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         this.tempFile = new File("/sdcard/a.jpg");
         //找尋Button按鈕
-        bt1 = (Button)findViewById(R.id.petButton);
+        Button bt1 = (Button)findViewById(R.id.petButton);
         bt1.setText("選擇圖片");//設定按鈕內文字
         //設定按鈕監聽式
         bt1.setOnClickListener(new Button.OnClickListener(){
@@ -78,7 +78,7 @@ public class AddActivity extends AppCompatActivity {
         //顯示填單日期
         Calendar mCal = Calendar.getInstance();
         CharSequence s = DateFormat.format("yyyy-MM-dd", mCal.getTime());    // kk:24小時制, hh:12小時制
-        tv=(TextView)findViewById(R.id.systemData);
+        TextView tv=(TextView)findViewById(R.id.systemData);
         tv.setText(String.valueOf(s.toString()));
 
 
