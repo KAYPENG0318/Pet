@@ -8,6 +8,8 @@ import android.view.Window;
 
 public class DetailActivity extends AppCompatActivity {
 
+    //LAYOUT 資料填入
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

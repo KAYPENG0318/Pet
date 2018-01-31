@@ -94,7 +94,7 @@
         android:ems="10"
         android:inputType="number"
         android:maxLength="2"
-        android:text="11"
+        android:text="  "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -147,7 +147,7 @@
         android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="1111"
+        android:text="   "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +180,7 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="111"
+        android:text="   "
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
 
@@ -202,7 +202,7 @@
         android:ems="10"
         android:inputType="phone"
         android:maxLength="10"
-        android:text="0922111114"
+        android:text="          "
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
@@ -295,7 +295,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="52dp"
-            android:onClick="petButton"
             app:layout_constraintEnd_toEndOf="@+id/petImage"
             app:layout_constraintStart_toStartOf="@+id/petImage"
             app:layout_constraintTop_toTopOf="@+id/petImage" />
@@ -310,6 +309,7 @@
         android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

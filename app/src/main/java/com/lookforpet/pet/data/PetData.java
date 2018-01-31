@@ -24,25 +24,50 @@ public class PetData {
     public String ownerLine;
     public String ownerEmail;
     public String ownerRemarks;
-    public String year;
-    public String month;
-    public String day;
+//    public String year;
+//    public String month;
+//    public String day;
+    public String date;
 
     public PetData()
     {
 
     }
 
-    public PetData(String petName, String petKind, String petAge)
+//    public PetData(String petName, String petKind, String petAge)
+//    {
+//        this.petName = petName;
+//        this.petKind = petKind;
+//        this.petAge = petAge;
+//        Log.d("PetData_petName", this.petName);
+//        Log.d("PetData_petKind",  this.petKind);
+//        Log.d("PetData_petAge",   this.petAge);
+//
+//    }
+
+
+    public PetData(String petName, String petKind, String petAge,String petSex,String petType, String petCity,String petArea,String petAddress,
+                   String ownerName, String ownerTel,   String ownerLine , String ownerEmail, String date)
     {
         this.petName = petName;
         this.petKind = petKind;
         this.petAge = petAge;
+        this.petSex = petSex;
+        this.petType=petType;
+        this.petCity=petCity;
+        this.petArea=petArea;
+        this.petAddress=petAddress;
+        this.ownerName=ownerName;
+        this.ownerTel=ownerTel;
+        this.ownerLine=ownerLine;
+        this.ownerEmail=ownerEmail;
+        this.date=date;
         Log.d("PetData_petName", this.petName);
         Log.d("PetData_petKind",  this.petKind);
         Log.d("PetData_petAge",   this.petAge);
 
     }
+
 
     public String getPetName() {
         return petName;
@@ -147,30 +172,30 @@ public class PetData {
     public void setOwnerRemarks(String ownerRemarks) {
         this.ownerRemarks = ownerRemarks;
     }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
+//
+//    public String getYear() {
+//        return year;
+//    }
+//
+//    public void setYear(String year) {
+//        this.year = year;
+//    }
+//
+//    public String getMonth() {
+//        return month;
+//    }
+//
+//    public void setMonth(String month) {
+//        this.month = month;
+//    }
+//
+//    public String getDay() {
+//        return day;
+//    }
+//
+//    public void setDay(String day) {
+//        this.day = day;
+//    }
 
 
 }

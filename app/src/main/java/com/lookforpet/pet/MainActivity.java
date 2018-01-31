@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
         Intent it=new Intent(MainActivity.this,AddActivity.class);
         startActivity(it);
         //新增 20180130
-        finish();
+       // finish();
     }
     public void buttonInquire(View v)
     {
         Intent it=new Intent(MainActivity.this,InquireActivity.class);
         startActivity(it);
         //新增 20180130
-        finish();
+       // finish();
     }
 }

@@ -12,6 +12,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,11 +27,18 @@ import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
-    EditText petName,petKind,petAge;
-    String name ;
-    String kind ;
-    String age ;
-
+    ImageView imageView;
+    EditText edpetName,edpetAge;
+    EditText edownerName,edownerTel,edownerLine,edownerEmail;
+    Spinner spkind,spsex,sptype;
+    String petSex;
+    String petType;
+    String petName ;
+    String petKind ;
+    String petAge ;
+    String petCity,petArea,petAddress;
+    String ownerName,ownerTel,ownerLine,ownerEmail;
+    String Date;
 
     private File tempFile;
     @Override
@@ -63,31 +71,89 @@ public class AddActivity extends AppCompatActivity {
 
         });
 
-
+        //寵物名
+        edpetName=(EditText)findViewById(R.id.petName);
 
         //下拉式選單：種類
-        Spinner spkind = (Spinner)findViewById(R.id.petKind);
+         spkind = (Spinner)findViewById(R.id.petKind);
         ArrayAdapter<CharSequence> choosekind = ArrayAdapter.createFromResource(AddActivity.this,
                 R.array.kind,android.R.layout.simple_spinner_dropdown_item);
         spkind.setAdapter(choosekind);
+        spkind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                petKind=adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //年紀
+        edpetAge=(EditText)findViewById(R.id.petAge);
+
         //下拉式選單：性別
-        Spinner spsex = (Spinner)findViewById(R.id.petSex);
+        spsex = (Spinner)findViewById(R.id.petSex);
         ArrayAdapter<CharSequence> choosesex = ArrayAdapter.createFromResource(AddActivity.this,
                 R.array.sex,android.R.layout.simple_spinner_dropdown_item);
         spsex.setAdapter(choosesex);
+        spsex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                petSex=adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         //下拉式選單：體型
-        Spinner sptype = (Spinner)findViewById(R.id.petType);
+        sptype = (Spinner)findViewById(R.id.petType);
         ArrayAdapter<CharSequence> choosetype = ArrayAdapter.createFromResource(AddActivity.this,
                 R.array.type,android.R.layout.simple_spinner_dropdown_item);
         sptype.setAdapter(choosetype);
+        sptype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                petType=adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        //失蹤地點
+        petCity="台北市";
+
+        petArea="大同區";
+
+        petAddress="承德路一段1號";
+
+        //飼主資料
+
+        edownerName=(EditText)findViewById(R.id.ownerName);
+
+        edownerTel=(EditText)findViewById(R.id.ownerTel);
+
+        edownerLine=(EditText)findViewById(R.id.ownerLine);
+
+        edownerEmail=(EditText)findViewById(R.id.ownerEmail);;
+
+
 
         //顯示填單日期
         Calendar mCal = Calendar.getInstance();
         CharSequence s = DateFormat.format("yyyy-MM-dd", mCal.getTime());    // kk:24小時制, hh:12小時制
+        Date=s.toString();
         TextView tv=(TextView)findViewById(R.id.systemData);
         tv.setText(String.valueOf(s.toString()));
-
-
 
     }
 
@@ -95,7 +161,7 @@ public class AddActivity extends AppCompatActivity {
     //取得相片後返回的監聽式
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ImageView imageView = (ImageView) findViewById(R.id.petImage);
+         imageView = (ImageView) findViewById(R.id.petImage);
         //當使用者按下確定後
         if (resultCode == RESULT_OK) {
 
@@ -110,9 +176,14 @@ public class AddActivity extends AppCompatActivity {
     public void clickOk(View v)
     {
 
-        name = petName.getText().toString();
-        kind = petKind.getText().toString();
-        age = petAge.getText().toString();
+        petName = edpetName.getText().toString();
+        Log.d("-<-petName-->",petName);
+        petAge=edpetAge.getText().toString();
+        ownerName=edownerName.getText().toString();
+        ownerTel=edownerTel.getText().toString();
+        ownerLine=edownerLine.getText().toString();
+        ownerEmail=edownerEmail.getText().toString();
+
 
 //        //再按一次就在arraylist 新增一筆 PetData
         if( MainActivity.dao.getList().size()>0)
@@ -120,10 +191,10 @@ public class AddActivity extends AppCompatActivity {
             //先arraylist 裡拿掉 物件
             MainActivity.dao.getList().remove(0);
             //在 arraylist  增加一筆物件
-            MainActivity.dao.add(new PetData(name, kind, age));
+            MainActivity.dao.add(new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
         }else{
             //有資料在 listarray裡了
-            MainActivity.dao.add(new PetData(name, kind, age));
+            MainActivity.dao.add(new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
         }
 
         Log.d("","AddActivity----"+MainActivity.dao.getList().size());
@@ -134,7 +205,6 @@ public class AddActivity extends AppCompatActivity {
         //MainActivity.dao.getList().get(0).petName
         it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
         startActivity(it);
-
 
     }
 

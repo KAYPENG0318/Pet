@@ -3,12 +3,12 @@ package com.lookforpet.pet.data;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.student.testpet.InquireActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lookforpet.pet.InquireActivity;
 
 import java.util.ArrayList;
 
@@ -18,21 +18,21 @@ import java.util.ArrayList;
 
 public class PetDataCloundDAO implements PetDAOControll {
 
-    //箱子
-    public  ArrayList<PetData> mylist=new ArrayList<>();
+
+    public  ArrayList<PetData> mylist;
 
     //存符合條 件的地方 位何檔都可以存取它
-    public  ArrayList<PetData> okmylist=new ArrayList<>();
+    public  ArrayList<PetData> okmylist;
 
     //從FIREBASE 取出資料
-    public static  ArrayList<PetData> list=new ArrayList<>();
+    public static  ArrayList<PetData> list;
 
     //二物件相連
     Context context;
     //FirebaseDatabase
-    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    FirebaseDatabase database;
     //資料送上去的根
-    DatabaseReference myRef=database.getReference();
+    DatabaseReference myRef;
 
     //在firebase 產生id
     private String userId;
@@ -40,14 +40,13 @@ public class PetDataCloundDAO implements PetDAOControll {
     public PetDataCloundDAO(final Context context)
     {
         this.context=context;
-        //atabase = FirebaseDatabase.getInstance();
-        //根叫 scores
-        //myRef = database.getReference();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         //預防一開始app沒給值
-       // mylist = new ArrayList<>();
+        mylist = new ArrayList<>();
         //預設先要空間
-       // okmylist= new ArrayList<>();
-       // list=new ArrayList<>();
+        okmylist= new ArrayList<>();
+        list=new ArrayList<>();
 
     }
 
@@ -65,15 +64,29 @@ public class PetDataCloundDAO implements PetDAOControll {
     //Write a message to the database
     private void saveFile()
     {
-        String _petName=mylist.get(0).petName;
-        String _petKind=mylist.get(0).petKind;
-        String _petAge=mylist.get(0).petAge;
+        String  petName=mylist.get(0).petName;
+        String  petKind=mylist.get(0).petKind;
+        String  petAge=mylist.get(0).petAge;
+        String  petSex=mylist.get(0).petSex;
+        String  petType=mylist.get(0).petType;
+        String  petCity=mylist.get(0).petCity;
+        String  petArea=mylist.get(0).petArea;
+        String  petAddress=mylist.get(0).petAddress;
+        String ownerName=mylist.get(0).ownerName;
+        String ownerTel=mylist.get(0).ownerTel;
+        String ownerLine=mylist.get(0).ownerLine;
+        String ownerEmail=mylist.get(0).ownerEmail;
+        String date=mylist.get(0).date;
+
+
+
+
 
         //custom object  每按確定鈕 就建立一筆
-        PetData petdata=new PetData(_petName,_petKind,_petAge);
+        PetData petdata=new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,date);
         //在mDatabase ROOT testfirbase-5fb08, 子節點 notes  push是唯一ID  getKey()是把唯一ID值取出來讓人類看
         String key=myRef.child("notes").push().getKey();
-        //這行是跟據路徑  給值
+        //這行是跟據路徑  送到FIREBASE 上
         myRef.child("notes").child(key).setValue(petdata);
     }
 
@@ -112,14 +125,16 @@ public class PetDataCloundDAO implements PetDAOControll {
 //                        String age=list.get(i).petAge;
 
                        // Log.d("我取出來的值是---:", petdata);
+                        //TEST 用
                         okmylist.add(list.get(i));
+                        //Inquirelist 的ARRAYLIST 接
                         InquireActivity.Inquirelist.add(list.get(i));
 
                         Log.d("InquireActivity--->",""+ InquireActivity.Inquirelist.size());
 
                     }
                 }
-
+              //TEST 用
               for(int i=0;i<okmylist.size();i++)
               {
                   String name=okmylist.get(i).petName;

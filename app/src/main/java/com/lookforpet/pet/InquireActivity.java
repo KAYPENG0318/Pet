@@ -21,6 +21,8 @@ public class InquireActivity extends AppCompatActivity {
     PetDataCloundDAO petDataCloundDAO;
     public static ArrayList<PetData> Inquirelist=new ArrayList<>();
 
+    //LAYOUT 長的資料填完整
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
