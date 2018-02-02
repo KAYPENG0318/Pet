@@ -11,6 +11,9 @@ import android.widget.Spinner;
 
 import com.lookforpet.pet.data.PetDAO;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     //靜態變數
     final public static PetDAO dao= new PetDAO();

@@ -1,11 +1,14 @@
 package com.lookforpet.pet;
 
+import android.*;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -20,14 +23,25 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lookforpet.pet.data.PetData;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class AddActivity extends AppCompatActivity {
-    ImageView imageView;
+
     EditText edpetName,edpetAge;
     EditText edownerName,edownerTel,edownerLine,edownerEmail;
     Spinner spkind,spsex,sptype;
@@ -39,37 +53,55 @@ public class AddActivity extends AppCompatActivity {
     String petCity,petArea,petAddress;
     String ownerName,ownerTel,ownerLine,ownerEmail;
     String Date;
+    Spinner spcity,spcity2;
+    City[] citys;
+
 
     private File tempFile;
+    Button btpic;
+    ImageView imagepic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_add);
+
+
+        //spinner抓取JSON全台縣市與鄉鎮區域
+        spcity=(Spinner)findViewById(R.id.petCity);
+        spcity2=(Spinner)findViewById(R.id.petArea);
+        InputStream is = getResources().openRawResource(R.raw.mydata);
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        StringBuilder sb = new StringBuilder();
+        String str;
+        try {
+            str = br.readLine();
+            sb.append(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String str1=sb.toString();
+        Gson gson=new Gson();
+        citys=gson.fromJson(str1,City[].class);
+        String[] Citytype = new String[citys.length];
+        for(int i=0;i<citys.length;i++)
+        {
+            Citytype[i]=citys[i].CityName;
+        }
+        ArrayAdapter<String> choosecity = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Citytype);
+        spcity.setAdapter(choosecity);
+        spcity.setOnItemSelectedListener(selectListener);
+
+
+
+
+        //抓取手機圖片
         this.tempFile = new File("/sdcard/a.jpg");
         //找尋Button按鈕
-        Button bt1 = (Button)findViewById(R.id.petButton);
-        bt1.setText("選擇圖片");//設定按鈕內文字
-        //設定按鈕監聽式
-        bt1.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                //開啟Pictures畫面Type設定為image
-                intent.setType("image/*");
-                //使用Intent.ACTION_GET_CONTENT這個Action  //會開啟選取圖檔視窗讓您選取手機內圖檔
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.putExtra("crop", "true");// crop=true 有這句才能叫出裁剪頁面.
-                intent.putExtra("aspectX", 1);// 这兩項為裁剪框的比例.
-                intent.putExtra("aspectY", 1);// x:y=1:1
-                intent.putExtra("output", Uri.fromFile(tempFile));
-                intent.putExtra("outputFormat", "JPEG");//返回格式
-                //取得相片後返回本畫面
-                startActivityForResult(Intent.createChooser(intent,"選擇圖片"),1);
-            }
-
-        });
+        btpic = (Button)findViewById(R.id.petButton);
+        btpic.setText("選擇圖片");//設定按鈕內文字
 
         //寵物名
         edpetName=(EditText)findViewById(R.id.petName);
@@ -129,12 +161,7 @@ public class AddActivity extends AppCompatActivity {
         });
 
 
-        //失蹤地點
-        petCity="台北市";
 
-        petArea="大同區";
-
-        petAddress="承德路一段1號";
 
         //飼主資料
 
@@ -158,19 +185,97 @@ public class AddActivity extends AppCompatActivity {
     }
 
 
+    public void petButton(View v)
+    {
+
+
+        int permission = ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[] {WRITE_EXTERNAL_STORAGE,
+                            READ_EXTERNAL_STORAGE},
+                    123
+            );
+        }
+        else
+        {
+
+            readPic();
+        }
+    }
+    private void readPic()
+    {
+        this.tempFile = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
+        //找尋Button按鈕
+
+
+        btpic.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //開啟Pictures畫面Type設定為image
+                intent.setType("image/*");
+                //使用Intent.ACTION_GET_CONTENT這個Action  //會開啟選取圖檔視窗讓您選取手機內圖檔
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.putExtra("crop", true);// crop=true 有這句才能叫出裁剪頁面.
+                intent.putExtra("aspectX", 1);// 这兩項為裁剪框的比例.
+                intent.putExtra("aspectY", 1);// x:y=1:1
+                intent.putExtra("return-data", true);
+                intent.putExtra("output", Uri.fromFile(tempFile));
+                intent.putExtra("outputFormat", "JPEG");//返回格式
+
+
+                //取得相片後返回本畫面
+                startActivityForResult(Intent.createChooser(intent,"選擇圖片"),456);
+            }
+        });
+
+    }
     //取得相片後返回的監聽式
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-         imageView = (ImageView) findViewById(R.id.petImage);
-        //當使用者按下確定後
-        if (resultCode == RESULT_OK) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            // 設定到ImageView
-            imageView.setImageDrawable(Drawable.createFromPath(tempFile.getAbsolutePath()));
+        if (requestCode == 456) {
+            //當使用者按下確定後
+            if (resultCode == RESULT_OK) {
+                // 設定到ImageView
 
+                Uri uri = data.getData();//取得圖檔的路徑位置
+                //Log.d("uri", uri.toString());//寫log
+                //抽象資料的接口
+                ContentResolver cr = this.getContentResolver();
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));//由抽象資料接口轉換圖檔路徑為Bitmap
+                    imagepic = (ImageView) findViewById(R.id.petImage);//取得圖片控制項ImageView
+                    imagepic.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
+                } catch (FileNotFoundException e) {
+                    Log.e("Exception", e.getMessage(), e);
+                }
+            }
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 123)
+        {
+
+            if (grantResults.length > 0
+                    && grantResults[0] == PERMISSION_GRANTED) {
+                //取得權限，進行檔案存取
+
+                readPic();
+            } else {
+                //使用者拒絕權限，停用檔案存取功能
+            }
+            return;
+        }
     }
     //填好資料送到確定頁
     public void clickOk(View v)
@@ -207,5 +312,29 @@ public class AddActivity extends AppCompatActivity {
         startActivity(it);
 
     }
+    //spinner第一個下拉類別的監看式
+    private AdapterView.OnItemSelectedListener selectListener = new AdapterView.OnItemSelectedListener(){
+        public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
+            //讀取第一個下拉選單是選擇第幾個
+            ArrayList<Map<String,String>> list = citys[position].AreaList;
+            String[] listname = new String[list.size()];
+
+            for(int i=0;i<list.size();i++)
+            {
+                listname[i]=list.get(i).get("AreaName");
+            }
+            Log.d("LIST:" ,listname.toString());
+            ArrayAdapter<String> choosearea = new ArrayAdapter<String>(AddActivity.this,android.R.layout.simple_spinner_item,listname);
+            spcity2.setAdapter(choosearea);
+
+
+
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0){
+
+        }
+
+    };
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pet</string>
+    <string name="app_name">尋找汪喵星人</string>
     <string-array name="kind">
         <item>犬</item>
         <item>貓</item>
