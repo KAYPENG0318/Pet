@@ -172,124 +172,66 @@ public class InquireActivity extends AppCompatActivity {
         showdata();
 
 
-//        //抓取符合自已要的訊息
-//        for(int i=0;i<petDataCloundDAO.list.size();i++)
-//        {
-//             String fpetKind =petDataCloundDAO.list.get(i).petKind;
-//             String fpetSex=petDataCloundDAO.list.get(i).petSex;
-//             String fpetCity=petDataCloundDAO.list.get(i).petCity;
-//            String fpetArea=petDataCloundDAO.list.get(i).petArea;
-//
-//            Log.d("fpetKind --",fpetKind);
-//            Log.d("fpetSex --",fpetSex);
-//            Log.d("fpetCity --",fpetCity);
-//            Log.d("fpetArea --",fpetArea);
-//
-//            //自已輸入的資料
-//            Log.d("mpetKind --",petKind);
-//            Log.d("mpetSex --",petSex);
-//            Log.d("mpetCity --",petCity);
-//            Log.d("mpetArea --",petArea);
-//
-//            if(fpetKind.equals(petKind) && fpetSex.equals(petSex) && fpetCity.equals(petCity) && fpetArea.equals(petArea))
-//            {
-//                //Inquirelist.add(petDataCloundDAO.list.get(i));
-//                if( Inquirelist.size()>0)
-//                {
-//                   for(int j=0;i<Inquirelist.size();j++)
-//                   {
-//                       //先arraylist 裡拿掉 物件
-//                       Inquirelist.remove(j);
-//                   }
-//                    //在 Inquirelist  增加物件
-//                    Inquirelist.add(petDataCloundDAO.list.get(i));
-//
-//                }else{
-//                    Inquirelist.add(petDataCloundDAO.list.get(i));
-//                }
-//
-//                Log.d("條件符合petArea--",petArea);
-//                Log.d("條件符合Inquirelist--",""+Inquirelist.size());
+    }
+
+    //清掉之前 選的資料  ARRAYLIST 裡面的資料 重新來一次
+    public void showdata()
+    {
+
+
+        //先清掉存放搜尋條件的ArrayList
+//        if( Inquirelist.size()>0) {
+//            for (int j = 0; j < Inquirelist.size(); j++) {
+//                //先arraylist 裡拿掉 物件
+//                Inquirelist.remove(j);
 //            }
-//
-//
-//            // 台北市 大同區 貓 雌
-////            if(fpetKind.equals(petKind)&&fpetSex.equals(petSex)&&fpetCity.equals(petCity)&&fpetArea.equals(petArea))
-////            {
-////
-////                Inquirelist.add(petDataCloundDAO.list.get(i));
-////               //很爛的寫法
-//////                if( Inquirelist.size()>0)
-//////                {
-//////                   for(int j=0;i<Inquirelist.size();j++)
-//////                   {
-//////                       //先arraylist 裡拿掉 物件
-//////                       Inquirelist.remove(j);
-//////                   }
-//////                    //在 Inquirelist  增加物件
-//////                    Inquirelist.add(petDataCloundDAO.list.get(i));
-//////
-//////                }else{
-//////                    Inquirelist.add(petDataCloundDAO.list.get(i));
-//////                }
-////
-////            }
 //
 //        }
 
-        //Inquirelist
-        //Log.d("YYY--->",""+petDataCloundDAO.list.size());
-        //Log.d("InquireList",""+Inquirelist.size());
 
-    }
+       //從FIREBASE 抓取全部資料過來
+        for(int i=0;i<oklist.size();i++) {
+            String okpetKind = oklist.get(i).petKind;
+            String okpetSex = oklist.get(i).petSex;
+            String okpetCity = oklist.get(i).petCity;
+            String okpetArea = oklist.get(i).petArea;
+            String ownername = oklist.get(i).ownerName;
 
-    public void showdata()
-    {
-        for(int i=0;i<oklist.size();i++)
-        {
-           String okpetKind=oklist.get(i).petKind;
-           String okpetSex=oklist.get(i).petSex;
-           String okpetCity=oklist.get(i).petCity;
-           String okpetArea=oklist.get(i).petArea;
-           String ownername=oklist.get(i).ownerName;
-
-            Log.d("okpetKind",okpetKind);
-            Log.d("okpetSex",okpetSex);
-            Log.d("okpetCity",okpetCity);
-            Log.d("okpetArea",okpetArea);
-            Log.d("ownername",ownername);
+            Log.d("okpetKind", okpetKind);
+            Log.d("okpetSex", okpetSex);
+            Log.d("okpetCity", okpetCity);
+            Log.d("okpetArea", okpetArea);
+            Log.d("ownername", ownername);
 
             Log.d("petKind",petKind);
             Log.d("petSex",petSex);
             Log.d("petCity",petCity);
             Log.d("petArea",petArea);
 
+            //比對搜尋條件相同 放入ARRAYLIST
             // 台北市 大同區 貓 雌--2
             //台北市 大同區   犬 雄--1
-            if(okpetKind.equals(petKind)&& okpetSex.equals(petSex) && okpetCity.equals(petCity)&& okpetArea.equals(petArea))
-            {
+            if (okpetKind.equals(petKind) && okpetSex.equals(petSex) && okpetCity.equals(petCity) && okpetArea.equals(petArea)) {
 
-//                Inquirelist.add(petDataCloundDAO.list.get(i));
-//               //很爛的寫法
-                if( Inquirelist.size()>0)
-                {
-                   for(int j=0;i<Inquirelist.size();j++)
-                   {
-                       //先arraylist 裡拿掉 物件
-                       Inquirelist.remove(j);
-                   }
-                    //在 Inquirelist  增加物件
-                    Inquirelist.add(petDataCloundDAO.list.get(i));
+                Inquirelist.add(oklist.get(i));
+                Log.d("Inquirelist",""+Inquirelist.size());
 
-                }else{
-                    Inquirelist.add(petDataCloundDAO.list.get(i));
-                }
+            }
 
-           }
+//            if (okpetKind.equals(petKind) && okpetSex.equals(petSex)) {
+//
+//                Inquirelist.add(oklist.get(i));
+//                Log.d("Inquirelist",""+Inquirelist.size());
+//
+//            }
+
+
         }
 
         Log.d("oklist",""+oklist.size());
-        Log.d("Inquirelist",""+Inquirelist.size());
+        //Log.d("Inquirelist", "" + Inquirelist.size());
+
+
 
     }
 

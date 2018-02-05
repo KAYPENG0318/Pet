@@ -58,6 +58,10 @@ public class AddActivity extends AppCompatActivity {
     Spinner spcity,spcity2;
     City[] citys;
 
+    Uri uri;
+
+    Bitmap bitmap;
+
 
     private File tempFile;
     Button btpic;
@@ -271,13 +275,16 @@ public class AddActivity extends AppCompatActivity {
             //當使用者按下確定後
             if (resultCode == RESULT_OK) {
                 // 設定到ImageView
-
-                Uri uri = data.getData();//取得圖檔的路徑位置
-                //Log.d("uri", uri.toString());//寫log
+                //*****
+                //Uri uri = data.getData();//取得圖檔的路徑位置
+                 uri = data.getData();//取得圖檔的路徑位置
+                Log.d("uri", uri.toString());//寫log  取這個傳過去 下面程式碼要寫全貼上一次
                 //抽象資料的接口
                 ContentResolver cr = this.getContentResolver();
                 try {
-                    Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));//由抽象資料接口轉換圖檔路徑為Bitmap
+                    //*****
+                    bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));//由抽象資料接口轉換圖檔路徑為Bitmap
+                    Log.d("bitmap", bitmap.toString());//寫log 若寫這個過去 只需要下面二行程式碼相同
                     imagepic = (ImageView) findViewById(R.id.petImage);//取得圖片控制項ImageView
                     imagepic.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
                 } catch (FileNotFoundException e) {
@@ -327,6 +334,7 @@ public class AddActivity extends AppCompatActivity {
         }else{
             //有資料在 listarray裡了
             MainActivity.dao.add(new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
+
         }
 
         Log.d("","AddActivity----"+MainActivity.dao.getList().size());
@@ -336,6 +344,9 @@ public class AddActivity extends AppCompatActivity {
         //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
         //MainActivity.dao.getList().get(0).petName
         it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
+        //暫時寫法 應該要把 bitmap 傳到 PetData 內
+        //it.putExtra("BitmapImage", bitmap);
+
         startActivity(it);
 
     }
@@ -344,15 +355,6 @@ public class AddActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
             petCity =parent.getItemAtPosition(position).toString();
 
-//            if(petCity==null)
-//            {
-//                petCity ="台北市";
-//            }
-//            else
-//            {
-//
-//                petCity =parent.getItemAtPosition(position).toString();
-//            }
 
 
             //讀取第一個下拉選單是選擇第幾個

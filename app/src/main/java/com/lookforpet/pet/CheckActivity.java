@@ -1,6 +1,7 @@
 package com.lookforpet.pet;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,11 @@ public class CheckActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_check);
+
+        //照片
+        imageView =(ImageView)findViewById(R.id.petImage);
+
+
         //寵物資料
         txtpetName = (TextView) findViewById(R.id.petName);
         txtpetKind = (TextView) findViewById(R.id.petKind);
@@ -73,6 +79,11 @@ public class CheckActivity extends AppCompatActivity {
 
         String petName=getIntent().getStringExtra("petName");
         Log.d("txtpetName ",""+txtpetName);
+
+        //接收照片
+       // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
+
+       // imageView.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
 
         p = MainActivity.dao.getStudent(petName);
         Log.d("test~",p.petName);
