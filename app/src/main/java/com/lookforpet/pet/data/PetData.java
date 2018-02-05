@@ -64,8 +64,8 @@ public class PetData {
         this.date=date;
         Log.d("PetData_petName", this.petName);
         Log.d("PetData_petKind",  this.petKind);
-        Log.d("PetData_petAge",   this.petAge);
-
+        Log.d("PetData_petCity",   this.petCity);
+        Log.d("PetData_petArea",   this.petArea);
     }
 
 

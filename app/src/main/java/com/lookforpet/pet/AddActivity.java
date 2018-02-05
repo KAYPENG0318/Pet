@@ -47,10 +47,12 @@ public class AddActivity extends AppCompatActivity {
     Spinner spkind,spsex,sptype;
     String petSex;
     String petType;
-    String petName ;
-    String petKind ;
-    String petAge ;
-    String petCity,petArea,petAddress;
+    String petName;
+    String petKind;
+    String petAge;
+    String petCity;
+    String petArea;
+    String petAddress;
     String ownerName,ownerTel,ownerLine,ownerEmail;
     String Date;
     Spinner spcity,spcity2;
@@ -95,8 +97,6 @@ public class AddActivity extends AppCompatActivity {
         spcity.setOnItemSelectedListener(selectListener);
 
 
-
-
         //抓取手機圖片
         this.tempFile = new File("/sdcard/a.jpg");
         //找尋Button按鈕
@@ -115,6 +115,16 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petKind=adapterView.getItemAtPosition(i).toString();
+
+//                if(petKind==null)
+//                {
+//                    petKind ="犬";
+//                }
+//                else
+//                {
+//                    petKind=adapterView.getItemAtPosition(i).toString();
+//                }
+
             }
 
             @Override
@@ -135,6 +145,15 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petSex=adapterView.getItemAtPosition(i).toString();
+//                if(petSex==null)
+//                {
+//                    petSex ="雌";
+//                }
+//                else
+//                {
+//                    petSex=adapterView.getItemAtPosition(i).toString();
+//                }
+
             }
 
             @Override
@@ -152,6 +171,17 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petType=adapterView.getItemAtPosition(i).toString();
+//
+//                if(petType==null)
+//                {
+//                    petType ="大";
+//                }
+//                else
+//                {
+//
+//                    petType=adapterView.getItemAtPosition(i).toString();
+//                }
+
             }
 
             @Override
@@ -159,8 +189,6 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         //飼主資料
@@ -187,7 +215,6 @@ public class AddActivity extends AppCompatActivity {
 
     public void petButton(View v)
     {
-
 
         int permission = ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -315,6 +342,19 @@ public class AddActivity extends AppCompatActivity {
     //spinner第一個下拉類別的監看式
     private AdapterView.OnItemSelectedListener selectListener = new AdapterView.OnItemSelectedListener(){
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
+            petCity =parent.getItemAtPosition(position).toString();
+
+//            if(petCity==null)
+//            {
+//                petCity ="台北市";
+//            }
+//            else
+//            {
+//
+//                petCity =parent.getItemAtPosition(position).toString();
+//            }
+
+
             //讀取第一個下拉選單是選擇第幾個
             ArrayList<Map<String,String>> list = citys[position].AreaList;
             String[] listname = new String[list.size()];
@@ -326,8 +366,32 @@ public class AddActivity extends AppCompatActivity {
             Log.d("LIST:" ,listname.toString());
             ArrayAdapter<String> choosearea = new ArrayAdapter<String>(AddActivity.this,android.R.layout.simple_spinner_item,listname);
             spcity2.setAdapter(choosearea);
+            spcity2.setOnItemSelectedListener(selectAR);
+        }
 
+        public void onNothingSelected(AdapterView<?> arg0){
 
+        }
+
+    };
+
+    // 行政區
+    //201824 增加取petArea
+    private AdapterView.OnItemSelectedListener selectAR = new AdapterView.OnItemSelectedListener(){
+        public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
+            //OK
+//            Log.d("position",""+position);
+            petArea =parent.getItemAtPosition(position).toString();
+            Log.d("petArea<------>",""+petArea);
+
+//            if(petArea==null)
+//            {
+//                petArea ="中正區";
+//            }
+//            else
+//            {
+//                petArea =parent.getItemAtPosition(position).toString();
+//            }
 
         }
 

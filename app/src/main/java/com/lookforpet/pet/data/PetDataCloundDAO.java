@@ -78,80 +78,132 @@ public class PetDataCloundDAO implements PetDAOControll {
         String ownerEmail=mylist.get(0).ownerEmail;
         String date=mylist.get(0).date;
 
-
-
-
-
         //custom object  每按確定鈕 就建立一筆
         PetData petdata=new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,date);
-        //在mDatabase ROOT testfirbase-5fb08, 子節點 notes  push是唯一ID  getKey()是把唯一ID值取出來讓人類看
+        //在mDatabase ROOT testfirbase-5fb08, 子節點 notes  push是唯一ID  getKey()是把唯一ID值取出來
         String key=myRef.child("notes").push().getKey();
         //這行是跟據路徑  送到FIREBASE 上
         myRef.child("notes").child(key).setValue(petdata);
+
     }
 
-    //取出資料
-    public void Inquire()
+    //  //取回在FIREBASE 資料
+    //InquireActivity
+    public void getPetData()
     {
-        Log.d("print---","print");
         //在這個子節點 notes 設定監聽 只要資料有變就會執行 ValueEventListener 這物件
         //這叫CALLBACK
         myRef.child("notes").addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //  dataSnapshot ，取得FIREBASE 裡 notes 節點裡全部內容
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     //取出來是 物件，所以要給裝這物件合的來的箱子
                     PetData note = noteDataSnapshot.getValue(PetData.class);
-                    //每一個物件取出來 放入 ARRAYLIST 內
+                    //OK  這邊可以接
                     list.add(note);
-                    Log.d("InquireActivity--->",""+ list.size());
+
+                    Log.d("PDAlistsize-->", "" + list.size());
 
                 }
 
-                //取出ARRAYLIST 內的物件，物件再取出裡面的值
-                for (int i = 0; i < list.size(); i++) {
-                    String name = list.get(i).petName;
-                    Log.d("我取出來的值是---:", name);
+//                Log.d("Inquire--->", "" + list.size());
+//                // //符合條件 放條件符合
+//                //台北市 大同區 雌 貓 2筆
 
-                    //查詢條件寫在這裡
-                    if (name.equals("Namexxxx")) {
-                        // 抓出符合條件的 物件放進去okmylist內
-                        //list 這個都是參考到 記憶體的值
-                        //???  有可能是這裡錯 要放 PetData
-//                        String nname=list.get(i).petName;
-//                        String kind=list.get(i).petKind;
-//                        String age=list.get(i).petAge;
+//                for(int i=0;i<list.size();i++)
+//                {
+//                    String petKind = list.get(i).petKind;
+//                    String petSex=list.get(i).petSex;
+//                    String petCity=list.get(i).petCity;
+//                    String petArea=list.get(i).petArea;
+//
+//                    Log.d("petKind",InquireActivity.petKind);
+//
+//                    if(petKind.equals(InquireActivity.petKind)&&petKind.equals(InquireActivity.petSex)&&petCity.equals(InquireActivity.petCity)&&petArea.equals(InquireActivity.petArea))
+//                    {
+//                        Log.d("petKind",InquireActivity.petKind);
+//                        okmylist.add(list.get(i));
+//                    }
+//
+//                }
+//
+//                Log.d("okmylist--->", "" + okmylist.size());
 
-                       // Log.d("我取出來的值是---:", petdata);
-                        //TEST 用
-                        okmylist.add(list.get(i));
-                        //Inquirelist 的ARRAYLIST 接
-                        InquireActivity.Inquirelist.add(list.get(i));
-
-                        Log.d("InquireActivity--->",""+ InquireActivity.Inquirelist.size());
-
-                    }
-                }
-              //TEST 用
-              for(int i=0;i<okmylist.size();i++)
-              {
-                  String name=okmylist.get(i).petName;
-                  String kind=okmylist.get(i).petKind;
-                  String petage=okmylist.get(i).petAge;
-                  Log.d("有沒有值---:", name);
-                  Log.d("大小大小",""+okmylist.size() );
-                  Log.d("有沒有值---:", kind);
-                  Log.d("有沒有值---:",petage);
-              }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        }  );
+        });
+
     }
+
+
+
+//    //取出資料
+//    public void Inquire()
+//    {
+//        Log.d("print---","print");
+//        //在這個子節點 notes 設定監聽 只要資料有變就會執行 ValueEventListener 這物件
+//        //這叫CALLBACK
+//        myRef.child("notes").addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                //  dataSnapshot ，取得FIREBASE 裡 notes 節點裡全部內容
+//                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+//                    //取出來是 物件，所以要給裝這物件合的來的箱子
+//                    PetData note = noteDataSnapshot.getValue(PetData.class);
+//                    //每一個物件取出來 放入 ARRAYLIST 內
+//                    list.add(note);
+//                    Log.d("InquireActivity--->",""+ list.size());
+//
+//                }
+//
+//                //取出ARRAYLIST 內的物件，物件再取出裡面的值
+//                for (int i = 0; i < list.size(); i++) {
+//                    String name = list.get(i).petName;
+//                    Log.d("我取出來的值是---:", name);
+//
+//                    //查詢條件寫在這裡
+//                    if (name.equals("Namexxxx")) {
+//                        // 抓出符合條件的 物件放進去okmylist內
+//                        //list 這個都是參考到 記憶體的值
+//                        //???  有可能是這裡錯 要放 PetData
+////                        String nname=list.get(i).petName;
+////                        String kind=list.get(i).petKind;
+////                        String age=list.get(i).petAge;
+//
+//                       // Log.d("我取出來的值是---:", petdata);
+//                        //TEST 用
+//                        okmylist.add(list.get(i));
+//                        //Inquirelist 的ARRAYLIST 接
+//                        InquireActivity.Inquirelist.add(list.get(i));
+//
+//                        Log.d("InquireActivity--->",""+ InquireActivity.Inquirelist.size());
+//
+//                    }
+//                }
+//              //TEST 用
+//              for(int i=0;i<okmylist.size();i++)
+//              {
+//                  String name=okmylist.get(i).petName;
+//                  String kind=okmylist.get(i).petKind;
+//                  String petage=okmylist.get(i).petAge;
+//                  Log.d("有沒有值---:", name);
+//                  Log.d("大小大小",""+okmylist.size() );
+//                  Log.d("有沒有值---:", kind);
+//                  Log.d("有沒有值---:",petage);
+//              }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        }  );
+//    }
 
     @Override
     public ArrayList<PetData> getList() {
