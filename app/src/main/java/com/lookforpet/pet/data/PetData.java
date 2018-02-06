@@ -1,5 +1,7 @@
 package com.lookforpet.pet.data;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
 /**
@@ -9,6 +11,10 @@ import android.util.Log;
 public class PetData {
 
     //照片
+    //public Bitmap bitmap;
+
+    //照片路徑變為字串
+    public String uri;
 
     //user 輸入只會有一筆
     public  String petName;
@@ -24,9 +30,7 @@ public class PetData {
     public String ownerLine;
     public String ownerEmail;
     public String ownerRemarks;
-//    public String year;
-//    public String month;
-//    public String day;
+
     public String date;
 
     public PetData()
@@ -34,21 +38,12 @@ public class PetData {
 
     }
 
-//    public PetData(String petName, String petKind, String petAge)
-//    {
-//        this.petName = petName;
-//        this.petKind = petKind;
-//        this.petAge = petAge;
-//        Log.d("PetData_petName", this.petName);
-//        Log.d("PetData_petKind",  this.petKind);
-//        Log.d("PetData_petAge",   this.petAge);
-//
-//    }
 
 
-    public PetData(String petName, String petKind, String petAge,String petSex,String petType, String petCity,String petArea,String petAddress,
+    public PetData(String uri,String petName, String petKind, String petAge,String petSex,String petType, String petCity,String petArea,String petAddress,
                    String ownerName, String ownerTel,   String ownerLine , String ownerEmail, String date)
     {
+        this.uri=uri;
         this.petName = petName;
         this.petKind = petKind;
         this.petAge = petAge;
@@ -63,10 +58,13 @@ public class PetData {
         this.ownerEmail=ownerEmail;
         this.date=date;
         Log.d("PetData_petName", this.petName);
+        Log.d("PetData_petName", this.petName);
         Log.d("PetData_petKind",  this.petKind);
         Log.d("PetData_petCity",   this.petCity);
         Log.d("PetData_petArea",   this.petArea);
+
     }
+
 
 
     public String getPetName() {

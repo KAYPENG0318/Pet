@@ -1,7 +1,10 @@
 package com.lookforpet.pet;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lookforpet.pet.data.PetData;
 import com.lookforpet.pet.data.PetDataCloundDAO;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class CheckActivity extends AppCompatActivity {
-    ImageView imageView;
+    ImageView imagepic;
 
     String petName ;
     String petKind ;
@@ -30,6 +37,7 @@ public class CheckActivity extends AppCompatActivity {
     TextView txtownerName,txtownerTel,txtownerLine,txtownerEmail;
     TextView txtdate;
 
+    Uri FileUri;
     PetData p;
 
     public PetDataCloundDAO petDataCloundDAO;
@@ -42,9 +50,7 @@ public class CheckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check);
 
         //照片
-        imageView =(ImageView)findViewById(R.id.petImage);
-
-
+        //imagepic =(ImageView)findViewById(R.id.petImage);
         //寵物資料
         txtpetName = (TextView) findViewById(R.id.petName);
         txtpetKind = (TextView) findViewById(R.id.petKind);
@@ -78,14 +84,28 @@ public class CheckActivity extends AppCompatActivity {
     {
 
         String petName=getIntent().getStringExtra("petName");
-        Log.d("txtpetName ",""+txtpetName);
+        //Log.d("txtpetName ",""+txtpetName);
 
         //接收照片
        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
-
-       // imageView.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
-
         p = MainActivity.dao.getStudent(petName);
+
+        String suri=p.uri;
+        Log.d("suri--->",suri);
+
+        //字串轉回 Uri
+        FileUri =Uri.parse(suri);
+
+        ContentResolver cr = this.getContentResolver();
+        try {
+           Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(FileUri));//由抽象資料接口轉換圖檔路徑為Bitmap
+            Log.d("bitmap", bitmap.toString());//寫log 若寫這個過去 只需要下面二行程式碼相同
+            imagepic = (ImageView) findViewById(R.id.petImage);//取得圖片控制項ImageView
+            imagepic.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
+        } catch (FileNotFoundException e) {
+            Log.e("Exception", e.getMessage(), e);
+        }
+
         Log.d("test~",p.petName);
         txtpetName.setText(p.petName);
         txtpetKind.setText(p.petKind);
@@ -103,23 +123,19 @@ public class CheckActivity extends AppCompatActivity {
         txtownerEmail.setText(p.ownerEmail);
         txtdate.setText(p.date);
 
-
     }
-
 
 
     //送到FIREBASE
     public void buttonSend(View v)
     {
-
         //把資料送到firebase另一個類別處理
         // 加到 Clound 上  把etDataCloundDAO
         petDataCloundDAO.add(p);
-
+        Toast.makeText(CheckActivity.this, "資料已送出", Toast.LENGTH_LONG).show();
         Intent it =new Intent(CheckActivity.this,MainActivity.class);
         startActivity(it);
         finish();
-
     }
 
     //回前一頁

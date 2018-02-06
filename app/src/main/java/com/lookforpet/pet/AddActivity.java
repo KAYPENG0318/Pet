@@ -58,11 +58,11 @@ public class AddActivity extends AppCompatActivity {
     Spinner spcity,spcity2;
     City[] citys;
 
-    Uri uri;
+    Uri FileUri;
+
+    String suri;
 
     Bitmap bitmap;
-
-
     private File tempFile;
     Button btpic;
     ImageView imagepic;
@@ -120,14 +120,6 @@ public class AddActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petKind=adapterView.getItemAtPosition(i).toString();
 
-//                if(petKind==null)
-//                {
-//                    petKind ="犬";
-//                }
-//                else
-//                {
-//                    petKind=adapterView.getItemAtPosition(i).toString();
-//                }
 
             }
 
@@ -247,11 +239,11 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 //開啟Pictures畫面Type設定為image
                 intent.setType("image/*");
                 //使用Intent.ACTION_GET_CONTENT這個Action  //會開啟選取圖檔視窗讓您選取手機內圖檔
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
                 intent.putExtra("crop", true);// crop=true 有這句才能叫出裁剪頁面.
                 intent.putExtra("aspectX", 1);// 这兩項為裁剪框的比例.
                 intent.putExtra("aspectY", 1);// x:y=1:1
@@ -275,16 +267,16 @@ public class AddActivity extends AppCompatActivity {
             //當使用者按下確定後
             if (resultCode == RESULT_OK) {
                 // 設定到ImageView
-                //*****
-                //Uri uri = data.getData();//取得圖檔的路徑位置
-                 uri = data.getData();//取得圖檔的路徑位置
-                Log.d("uri", uri.toString());//寫log  取這個傳過去 下面程式碼要寫全貼上一次
+                //這邊抓URL 送到 CheckActivity
+                //上傳Firebase
+                FileUri = data.getData();//取得圖檔的路徑位置
+                //uri 轉字串
+                suri=FileUri.toString();
+                Log.d("uri", FileUri.toString());//寫log
                 //抽象資料的接口
                 ContentResolver cr = this.getContentResolver();
                 try {
-                    //*****
-                    bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));//由抽象資料接口轉換圖檔路徑為Bitmap
-                    Log.d("bitmap", bitmap.toString());//寫log 若寫這個過去 只需要下面二行程式碼相同
+                    Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(FileUri));//由抽象資料接口轉換圖檔路徑為Bitmap
                     imagepic = (ImageView) findViewById(R.id.petImage);//取得圖片控制項ImageView
                     imagepic.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
                 } catch (FileNotFoundException e) {
@@ -292,7 +284,6 @@ public class AddActivity extends AppCompatActivity {
                 }
             }
         }
-
 
     }
     @Override
@@ -330,10 +321,11 @@ public class AddActivity extends AppCompatActivity {
             //先arraylist 裡拿掉 物件
             MainActivity.dao.getList().remove(0);
             //在 arraylist  增加一筆物件
-            MainActivity.dao.add(new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
+            MainActivity.dao.add(new PetData(suri,petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
+
         }else{
             //有資料在 listarray裡了
-            MainActivity.dao.add(new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
+            MainActivity.dao.add(new PetData(suri,petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
 
         }
 
@@ -344,8 +336,6 @@ public class AddActivity extends AppCompatActivity {
         //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
         //MainActivity.dao.getList().get(0).petName
         it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
-        //暫時寫法 應該要把 bitmap 傳到 PetData 內
-        //it.putExtra("BitmapImage", bitmap);
 
         startActivity(it);
 
