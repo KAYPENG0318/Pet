@@ -73,7 +73,6 @@ public class AddActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_add);
 
-
         //spinner抓取JSON全台縣市與鄉鎮區域
         spcity=(Spinner)findViewById(R.id.petCity);
         spcity2=(Spinner)findViewById(R.id.petArea);
@@ -141,14 +140,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petSex=adapterView.getItemAtPosition(i).toString();
-//                if(petSex==null)
-//                {
-//                    petSex ="雌";
-//                }
-//                else
-//                {
-//                    petSex=adapterView.getItemAtPosition(i).toString();
-//                }
+//
 
             }
 
@@ -168,16 +160,7 @@ public class AddActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petType=adapterView.getItemAtPosition(i).toString();
 //
-//                if(petType==null)
-//                {
-//                    petType ="大";
-//                }
-//                else
-//                {
 //
-//                    petType=adapterView.getItemAtPosition(i).toString();
-//                }
-
             }
 
             @Override

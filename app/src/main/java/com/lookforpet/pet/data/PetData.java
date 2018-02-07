@@ -39,6 +39,33 @@ public class PetData {
     }
 
 
+    public PetData(String petName, String petKind, String petAge,String petSex,String petType, String petCity,String petArea,String petAddress,
+                   String ownerName, String ownerTel,   String ownerLine , String ownerEmail, String date)
+    {
+
+        this.petName = petName;
+        this.petKind = petKind;
+        this.petAge = petAge;
+        this.petSex = petSex;
+        this.petType=petType;
+        this.petCity=petCity;
+        this.petArea=petArea;
+        this.petAddress=petAddress;
+        this.ownerName=ownerName;
+        this.ownerTel=ownerTel;
+        this.ownerLine=ownerLine;
+        this.ownerEmail=ownerEmail;
+        this.date=date;
+        Log.d("PetData_petName", this.petName);
+        Log.d("PetData_petName", this.petName);
+        Log.d("PetData_petKind",  this.petKind);
+        Log.d("PetData_petCity",   this.petCity);
+        Log.d("PetData_petArea",   this.petArea);
+
+    }
+
+
+
 
     public PetData(String uri,String petName, String petKind, String petAge,String petSex,String petType, String petCity,String petArea,String petAddress,
                    String ownerName, String ownerTel,   String ownerLine , String ownerEmail, String date)

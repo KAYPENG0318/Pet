@@ -76,7 +76,7 @@ public class PetDataCloundDAO implements PetDAOControll {
     private void saveFile()
     {
         //送基本資料到FIREBASE 全是字串
-        String  uri=mylist.get(0).uri;
+        //String  uri=mylist.get(0).uri;
         String  petName=mylist.get(0).petName;
         String  petKind=mylist.get(0).petKind;
         String  petAge=mylist.get(0).petAge;
@@ -91,34 +91,43 @@ public class PetDataCloundDAO implements PetDAOControll {
         String ownerEmail=mylist.get(0).ownerEmail;
         String date=mylist.get(0).date;
 
+
+        //
+
+
+        //傳照片到 storageRef 它寫到類別裡
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageRef = storage.getReference();
+//        String str="image/" + String.valueOf(new java.util.Date().getTime());
+//        StorageReference riversRef = storageRef.child(str);
+//
+//        FileUri =Uri.parse(uri);
+//
+//        UploadTask uploadTask = riversRef.putFile(FileUri);
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                Log.d("firebase",exception.getMessage());
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                Log.d("firebase","success");
+//            }
+//        });
+
         //custom object  每按確定鈕 就建立一筆
         //可能這URL 要改為路徑
-        PetData petdata=new PetData(uri,petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,date);
+        //PetData petdata=new PetData(uri,petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,date);
+
+        PetData petdata=new PetData(petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,date);
+
         //在mDatabase ROOT testfirbase-5fb08, 子節點 notes  push是唯一ID  getKey()是把唯一ID值取出來
         String key=myRef.child("notes").push().getKey();
         //這行是跟據路徑  送到FIREBASE 上
         myRef.child("notes").child(key).setValue(petdata);
 
-        //傳照片到 storageRef
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        String str="image/" + String.valueOf(new java.util.Date().getTime());
-        StorageReference riversRef = storageRef.child(str);
 
-        FileUri =Uri.parse(uri);
-
-        UploadTask uploadTask = riversRef.putFile(FileUri);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Log.d("firebase",exception.getMessage());
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d("firebase","success");
-            }
-        });
 
 
 
