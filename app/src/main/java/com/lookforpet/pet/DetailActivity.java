@@ -1,6 +1,10 @@
 package com.lookforpet.pet;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,12 +13,16 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lookforpet.pet.data.PetData;
 import com.lookforpet.pet.data.PetDataCloundDAO;
 
+import java.io.FileNotFoundException;
+import java.net.URL;
+
 public class DetailActivity extends AppCompatActivity {
     //LAYOUT 資料填入
-    ImageView imageView;
+    ImageView imagepic;
 
     String petName ;
     String petKind ;
@@ -37,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_detail);
         //照片
-        imageView =(ImageView)findViewById(R.id.petImage);
+        imagepic =(ImageView)findViewById(R.id.petImage);
 
         //寵物資料
         txtpetName = (TextView) findViewById(R.id.petName);
@@ -59,8 +67,6 @@ public class DetailActivity extends AppCompatActivity {
 
         //取出資料
 
-        //IMAGE
-
         String petName=getIntent().getStringExtra("petName");
         String petKind=getIntent().getStringExtra("petKind");
         String petAge=getIntent().getStringExtra("petAge");
@@ -74,6 +80,19 @@ public class DetailActivity extends AppCompatActivity {
         String ownerLine=getIntent().getStringExtra("ownerLine");
         String ownerEmail=getIntent().getStringExtra("ownerEmail");
         String date=getIntent().getStringExtra("date");
+        String uri=getIntent().getStringExtra("uri");
+
+
+       // String petName=getIntent().getStringExtra("petName");
+
+
+        //接收照片
+        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
+       // PetData p  = MainActivity.dao.getStudent(petName);
+
+       // Glide.with(DetailActivity.this).load(p.uri).into(imagepic);
+
+
 
         txtpetName.setText(petName);
         txtpetKind.setText(petKind);
@@ -91,9 +110,7 @@ public class DetailActivity extends AppCompatActivity {
         txtownerEmail.setText(ownerEmail);
         txtdate.setText(date);
 
-
     }
-
 
     public void buttonMain(View v)
     {

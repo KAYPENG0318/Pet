@@ -24,7 +24,6 @@ import java.io.FileNotFoundException;
 
 public class CheckActivity extends AppCompatActivity {
     ImageView imagepic;
-
     String petName ;
     String petKind ;
     String petAge ;
@@ -49,8 +48,6 @@ public class CheckActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_check);
 
-        //照片
-        //imagepic =(ImageView)findViewById(R.id.petImage);
         //寵物資料
         txtpetName = (TextView) findViewById(R.id.petName);
         txtpetKind = (TextView) findViewById(R.id.petKind);
@@ -70,8 +67,6 @@ public class CheckActivity extends AppCompatActivity {
         //日期
         txtdate=(TextView)findViewById(R.id.systemData);
 
-
-
         petDataCloundDAO= new PetDataCloundDAO(CheckActivity.this);
 
         showDetail();
@@ -88,13 +83,14 @@ public class CheckActivity extends AppCompatActivity {
         //接收照片
        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
         p = MainActivity.dao.getStudent(petName);
-
+        ////本地端 抓照片位置
         String suri=p.uri;
         Log.d("suri--->",suri);
 
         //字串轉回 Uri
         FileUri =Uri.parse(suri);
 
+        //本地端 抓照片位置
         ContentResolver cr = this.getContentResolver();
         try {
            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(FileUri));//由抽象資料接口轉換圖檔路徑為Bitmap
@@ -124,7 +120,6 @@ public class CheckActivity extends AppCompatActivity {
 
     }
 
-
     //送到FIREBASE
     public void buttonSend(View v)
     {
@@ -136,6 +131,7 @@ public class CheckActivity extends AppCompatActivity {
         startActivity(it);
         finish();
     }
+
 
     //回前一頁
     public void buttonBack(View v)

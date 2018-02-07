@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lookforpet.pet.data.PetData;
@@ -57,11 +58,8 @@ public class AddActivity extends AppCompatActivity {
     String Date;
     Spinner spcity,spcity2;
     City[] citys;
-
     Uri FileUri;
-
     String suri;
-
     Bitmap bitmap;
     private File tempFile;
     Button btpic;
@@ -118,8 +116,6 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 petKind=adapterView.getItemAtPosition(i).toString();
-
-
             }
 
             @Override
@@ -181,7 +177,6 @@ public class AddActivity extends AppCompatActivity {
         edownerEmail=(EditText)findViewById(R.id.ownerEmail);;
 
 
-
         //顯示填單日期
         Calendar mCal = Calendar.getInstance();
         CharSequence s = DateFormat.format("yyyy-MM-dd", mCal.getTime());    // kk:24小時制, hh:12小時制
@@ -208,7 +203,6 @@ public class AddActivity extends AppCompatActivity {
         }
         else
         {
-
             readPic();
         }
     }
@@ -217,7 +211,6 @@ public class AddActivity extends AppCompatActivity {
     {
         this.tempFile = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
         //找尋Button按鈕
-
 
         btpic.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -246,16 +239,17 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 456) {
             //當使用者按下確定後
             if (resultCode == RESULT_OK) {
                 // 設定到ImageView
                 //這邊抓URL 送到 CheckActivity
-                //上傳Firebase
+                //本機路徑
                 FileUri = data.getData();//取得圖檔的路徑位置
+
                 //uri 轉字串
                 suri=FileUri.toString();
+
                 Log.d("uri", FileUri.toString());//寫log
                 //抽象資料的接口
                 ContentResolver cr = this.getContentResolver();
@@ -289,6 +283,12 @@ public class AddActivity extends AppCompatActivity {
     //填好資料送到確定頁
     public void clickOk(View v)
     {
+        if(suri==null)
+        {
+            Toast.makeText(AddActivity.this,"請選擇毛小孩照片",Toast.LENGTH_LONG).show();
+            return;
+
+        }
 
         petName = edpetName.getText().toString();
         Log.d("-<-petName-->",petName);
@@ -310,7 +310,6 @@ public class AddActivity extends AppCompatActivity {
         }else{
             //有資料在 listarray裡了
             MainActivity.dao.add(new PetData(suri,petName,petKind,petAge,petSex,petType,petCity,petArea,petAddress,ownerName,ownerTel,ownerLine,ownerEmail,Date));
-
         }
 
         Log.d("","AddActivity----"+MainActivity.dao.getList().size());
@@ -328,8 +327,6 @@ public class AddActivity extends AppCompatActivity {
     private AdapterView.OnItemSelectedListener selectListener = new AdapterView.OnItemSelectedListener(){
         public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
             petCity =parent.getItemAtPosition(position).toString();
-
-
 
             //讀取第一個下拉選單是選擇第幾個
             ArrayList<Map<String,String>> list = citys[position].AreaList;
@@ -359,15 +356,6 @@ public class AddActivity extends AppCompatActivity {
 //            Log.d("position",""+position);
             petArea =parent.getItemAtPosition(position).toString();
             Log.d("petArea<------>",""+petArea);
-
-//            if(petArea==null)
-//            {
-//                petArea ="中正區";
-//            }
-//            else
-//            {
-//                petArea =parent.getItemAtPosition(position).toString();
-//            }
 
         }
 

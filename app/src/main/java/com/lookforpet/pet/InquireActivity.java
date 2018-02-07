@@ -30,11 +30,13 @@ public class InquireActivity extends AppCompatActivity {
     TextView txtpetKind;
     TextView txtpetAge;
     PetDataCloundDAO petDataCloundDAO;
-
     public ArrayList<PetData> oklist=new ArrayList<>();
 
     //符合資料放這裡
     public  ArrayList<PetData> Inquirelist=new ArrayList<>();
+
+    //TEST
+    ImageListAdapter adapter;
 
     //LAYOUT 長的資料填完整
     //縣市 行政區
@@ -52,9 +54,7 @@ public class InquireActivity extends AppCompatActivity {
     public  String spetSex;
 
     Myadpter myadpter;
-
     ListView listView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,16 +133,16 @@ public class InquireActivity extends AppCompatActivity {
         spcity.setAdapter(choosecity);
         spcity.setOnItemSelectedListener(selectListener);
 
-
         petDataCloundDAO = new PetDataCloundDAO(InquireActivity.this);
         //抓在FIREBASE 資料抓回來
         petDataCloundDAO.getPetData();
-
 
         //ListView
         listView = (ListView) findViewById(R.id.listView);
 
         myadpter = new Myadpter(InquireActivity.this);
+
+
 
 
     }
@@ -153,7 +153,6 @@ public class InquireActivity extends AppCompatActivity {
         if(petDataCloundDAO.list.size()==0)
         {
             Toast.makeText(InquireActivity.this, "資料正在下載中", Toast.LENGTH_LONG).show();
-
             return;
         }
 
@@ -161,7 +160,7 @@ public class InquireActivity extends AppCompatActivity {
 
         for(int i=0;i<petDataCloundDAO.list.size();i++)
         {
-
+            //接從FIREBASE 抓出來的值
             oklist.add(petDataCloundDAO.list.get(i));
 
         }
@@ -182,6 +181,7 @@ public class InquireActivity extends AppCompatActivity {
 
 //       //從FIREBASE 抓取全部資料過來
         for(int i=0;i<oklist.size();i++) {
+
             String okpetKind = oklist.get(i).petKind.trim();
             String okpetSex = oklist.get(i).petSex.trim();
             String okpetCity = oklist.get(i).petCity.trim();
@@ -193,7 +193,6 @@ public class InquireActivity extends AppCompatActivity {
             String petSex=spetSex.trim();
             String petCity=spetCity.trim();
             String petArea=spetArea.trim();
-
 
             Log.d("okpetKind", okpetKind);
             Log.d("okpetSex", okpetSex);
@@ -212,9 +211,12 @@ public class InquireActivity extends AppCompatActivity {
             //台北市 大同區   犬 雄--1
 
             if (okpetKind.equals(petKind) && okpetSex.equals(petSex) && okpetArea.equals(petArea)) {
-
+                //FIREBASE 下載下來的資料
+                //這裡是KEY 它是FIREBASE 下載下來 不是本地端的PetData類別資料
                 Inquirelist.add(oklist.get(i));
-//                Log.d("Inquirelist",""+Inquirelist.size());
+                Log.d("Inquirelist",""+Inquirelist.size());
+
+                //new 物件 存在本地端
 
             }
 
@@ -223,19 +225,34 @@ public class InquireActivity extends AppCompatActivity {
             }
 
 
-            //listView 呈現畫面
+        //listView 呈現畫面 它等於接上FIREBASE 的物件
         myadpter.arrayList=Inquirelist;
-        listView.setAdapter(myadpter);
+
+        //TEST 它也可以用喔~
+        //adapter= new ImageListAdapter(InquireActivity.this,R.layout.myitem,  Inquirelist);
+        //listView.setAdapter(adapter);
+
+       listView.setAdapter(myadpter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView arg0, View arg1, int arg2,
                                     long arg3) {
                // 按的是哪一個VIEW arg2
-                Log.d("arg2",""+arg2);
+               // Log.d("arg2",""+arg2);
                 Intent it = new Intent(InquireActivity.this, DetailActivity.class);
-                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
-                //MainActivity.dao.getList().get(0).petName
-                it.putExtra("petName",Inquirelist.get(arg2).petName);
+//                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+//                //這裡也無法接 http
+
+//                it.putExtra("imageUri",Inquirelist.get(arg2).uri);
+
+
+//                it.putExtra("imageUri",Inquirelist.get(arg2).uri);
+////                Log.d("imageUri--->",Inquirelist.get(arg2).uri);
+///
+         it.putExtra("petName",Inquirelist.get(arg2).petName);
+               // Log.d("petName--->",Inquirelist.get(arg2).petName);
+
                 it.putExtra("petKind",Inquirelist.get(arg2).petKind);
                 it.putExtra("petAge",Inquirelist.get(arg2).petAge);
                 it.putExtra("petSex",Inquirelist.get(arg2).petSex);
@@ -249,8 +266,6 @@ public class InquireActivity extends AppCompatActivity {
                 it.putExtra("ownerEmail",Inquirelist.get(arg2).ownerEmail);
                 it.putExtra("date",Inquirelist.get(arg2).date);
 
-                //暫時寫法 應該要把 bitmap 傳到 PetData 內
-                //it.putExtra("BitmapImage", bitmap);
                 startActivity(it);
 
             }

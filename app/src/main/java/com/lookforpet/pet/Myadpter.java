@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.StorageReference;
 import com.lookforpet.pet.data.PetData;
 
 import java.io.FileNotFoundException;
@@ -30,11 +32,11 @@ public class Myadpter extends BaseAdapter {
 
     Context context;
 
+    String pic;
+
     Myadpter(Context context)
     {
         this.context=context;
-
-
     }
 
     @Override
@@ -57,6 +59,11 @@ public class Myadpter extends BaseAdapter {
     //position 就是看  getCount 有多少值 5個 0 1 2 3 4
     @Override
     public View getView(final int position, View v, ViewGroup parent) {
+//      //pic =arrayList.get(position).uri;
+//        pic =arrayList.get(0).uri;
+//
+//        Log.d("loadpic---",pic);
+
         ViewHolder viewHolder;
         //程式一開始跑 v 會是 null 把要抓的元件全抓起來 優化程式碼
        if(v==null) {
@@ -80,25 +87,10 @@ public class Myadpter extends BaseAdapter {
        }
 
        //取出值
-//        viewHolder.tv.setText(arrayList.get(position).get("city").toString());
-//        viewHolder.tv3.setText(arrayList.get(position).get("code").toString());
-//        //viewHolder. image.setImageResource((Integer) arrayList.get(position).get("image"));
 
         viewHolder.tv.setText(arrayList.get(position).petName.toString());
         viewHolder.tv3.setText(arrayList.get(position).date.toString());
-//        String pic=arrayList.get(position).uri.toString();
-//        Uri FileUri =Uri.parse(pic);
-//        ContentResolver cr = this.getContentResolver();
-//        try {
-//            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(FileUri));//由抽象資料接口轉換圖檔路徑為Bitmap
-//            Log.d("bitmap", bitmap.toString());//寫log 若寫這個過去 只需要下面二行程式碼相同
-//            viewHolder.image.setImageBitmap(bitmap);
-//        } catch (FileNotFoundException e) {
-//            Log.e("Exception", e.getMessage(), e);
-//        }
-
-
-        //viewHolder. image.setImageResource((Integer) arrayList.get(position).get("image"));
+        Glide.with(context).load(arrayList.get(position).uri).into(viewHolder.image);
 
         //元件設tab
          v.setTag(viewHolder);
