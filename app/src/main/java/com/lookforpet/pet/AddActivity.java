@@ -212,6 +212,7 @@ public class AddActivity extends AppCompatActivity {
             readPic();
         }
     }
+    //
     private void readPic()
     {
         this.tempFile = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");

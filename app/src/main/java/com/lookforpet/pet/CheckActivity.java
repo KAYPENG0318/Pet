@@ -72,7 +72,6 @@ public class CheckActivity extends AppCompatActivity {
 
 
 
-
         petDataCloundDAO= new PetDataCloundDAO(CheckActivity.this);
 
         showDetail();
