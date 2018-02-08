@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.lookforpet.pet.data.PetDAO;
 import com.lookforpet.pet.data.PetData;
 import com.lookforpet.pet.data.PetDataCloundDAO;
 
@@ -34,6 +35,10 @@ public class InquireActivity extends AppCompatActivity {
 
     //符合資料放這裡
     public  ArrayList<PetData> Inquirelist=new ArrayList<>();
+
+    //很不好的寫法 放符合資料 到DetailActivity
+    final public static PetDAO dao= new PetDAO();
+
 
     //TEST
     ImageListAdapter adapter;
@@ -179,6 +184,8 @@ public class InquireActivity extends AppCompatActivity {
      Log.d("showdata","showdata");
         Inquirelist.clear();
 
+        dao.getList().clear();
+
 //       //從FIREBASE 抓取全部資料過來
         for(int i=0;i<oklist.size();i++) {
 
@@ -213,20 +220,32 @@ public class InquireActivity extends AppCompatActivity {
             if (okpetKind.equals(petKind) && okpetSex.equals(petSex) && okpetArea.equals(petArea)) {
                 //FIREBASE 下載下來的資料
                 //這裡是KEY 它是FIREBASE 下載下來 不是本地端的PetData類別資料
+                //TEST 都有跑出來
                 Inquirelist.add(oklist.get(i));
+               // Log.d("oklist",""+oklist.size());
                 Log.d("Inquirelist",""+Inquirelist.size());
 
-                //new 物件 存在本地端
+                dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
+
+//                if(Inquirelist.size()==0)
+//                {
+//                    Toast.makeText(InquireActivity.this, "資料正在下載中", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//
+//                //FIREBASE 裡資料放在本地端
+//                dao.add(new PetData(Inquirelist.get(i).uri,Inquirelist.get(i).petName,Inquirelist.get(i).petKind,Inquirelist.get(i).petAge,Inquirelist.get(i).petSex, Inquirelist.get(i).petType,Inquirelist.get(i).petCity,Inquirelist.get(i).petArea,Inquirelist.get(i).petAddress,Inquirelist.get(i).ownerName,Inquirelist.get(i).ownerTel,Inquirelist.get(i).ownerLine,Inquirelist.get(i).ownerEmail,Inquirelist.get(i).date));
 
             }
 
-                Log.d("Inquirelist",""+Inquirelist.size());
 
-            }
+        }
 
 
         //listView 呈現畫面 它等於接上FIREBASE 的物件
         myadpter.arrayList=Inquirelist;
+
+        Log.d("log",""+Inquirelist.get(0));
 
         //TEST 它也可以用喔~
         //adapter= new ImageListAdapter(InquireActivity.this,R.layout.myitem,  Inquirelist);
@@ -234,37 +253,45 @@ public class InquireActivity extends AppCompatActivity {
 
        listView.setAdapter(myadpter);
 
+       //很奇怪的寫法 硬寫的   Inquirelist已是 物件 給予dao.mylist 為了取出 放在 ArrayList內的PetDATA物件
+        //REFERENCE FIREBASE
+        //TEST 是不行的
+       // MainActivity.dao.mylist =Inquirelist;
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView arg0, View arg1, int arg2,
                                     long arg3) {
-               // 按的是哪一個VIEW arg2
-               // Log.d("arg2",""+arg2);
-                Intent it = new Intent(InquireActivity.this, DetailActivity.class);
-//                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+//               // 按的是哪一個VIEW arg2
+//               // Log.d("arg2",""+arg2);
+        Intent it = new Intent(InquireActivity.this, DetailActivity.class);
+////                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+        it.putExtra("petName",dao.getList().get(arg2).petName);
+
+
+
+                //TEST
+                //it.putExtra("petName",MainActivity.dao.getList().get(arg2).petName);
+
 //                //這裡也無法接 http
-
 //                it.putExtra("imageUri",Inquirelist.get(arg2).uri);
-
-
-//                it.putExtra("imageUri",Inquirelist.get(arg2).uri);
-////                Log.d("imageUri--->",Inquirelist.get(arg2).uri);
-///
-         it.putExtra("petName",Inquirelist.get(arg2).petName);
-               // Log.d("petName--->",Inquirelist.get(arg2).petName);
-
-                it.putExtra("petKind",Inquirelist.get(arg2).petKind);
-                it.putExtra("petAge",Inquirelist.get(arg2).petAge);
-                it.putExtra("petSex",Inquirelist.get(arg2).petSex);
-                it.putExtra("petType",Inquirelist.get(arg2).petType);
-                it.putExtra("petCity",Inquirelist.get(arg2).petCity);
-                it.putExtra("petArea",Inquirelist.get(arg2).petArea);
-                it.putExtra("petAddress",Inquirelist.get(arg2).petAddress);
-                it.putExtra("ownerName",Inquirelist.get(arg2).ownerName);
-                it.putExtra("ownerTel",Inquirelist.get(arg2).ownerTel);
-                it.putExtra("ownerLine",Inquirelist.get(arg2).ownerLine);
-                it.putExtra("ownerEmail",Inquirelist.get(arg2).ownerEmail);
-                it.putExtra("date",Inquirelist.get(arg2).date);
+//          it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
+/////
+//         it.putExtra("petName",Inquirelist.get(arg2).petName);
+//               // Log.d("petName--->",Inquirelist.get(arg2).petName);
+//
+//                it.putExtra("petKind",Inquirelist.get(arg2).petKind);
+//                it.putExtra("petAge",Inquirelist.get(arg2).petAge);
+//                it.putExtra("petSex",Inquirelist.get(arg2).petSex);
+//                it.putExtra("petType",Inquirelist.get(arg2).petType);
+//                it.putExtra("petCity",Inquirelist.get(arg2).petCity);
+//                it.putExtra("petArea",Inquirelist.get(arg2).petArea);
+//                it.putExtra("petAddress",Inquirelist.get(arg2).petAddress);
+//                it.putExtra("ownerName",Inquirelist.get(arg2).ownerName);
+//                it.putExtra("ownerTel",Inquirelist.get(arg2).ownerTel);
+//                it.putExtra("ownerLine",Inquirelist.get(arg2).ownerLine);
+//                it.putExtra("ownerEmail",Inquirelist.get(arg2).ownerEmail);
+//                it.putExtra("date",Inquirelist.get(arg2).date);
 
                 startActivity(it);
 
@@ -325,7 +352,6 @@ public class InquireActivity extends AppCompatActivity {
         }
 
     };
-
 
 
 }

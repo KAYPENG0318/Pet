@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_main);
 
-
-
     }
 
     public void buttonAdd(View v)

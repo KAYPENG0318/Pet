@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     String petType;
     String petCity,petArea,petAddress;
     String ownerName,ownerTel,ownerLine,ownerEmail;
-    String Date;
+    String date;
     TextView txtpetName, txtpetKind, txtpetAge,txtpetSex,txtpetType,txtpetCity,txtpetArea,txtpetAddress;
     TextView txtownerName,txtownerTel,txtownerLine,txtownerEmail;
     TextView txtdate;
@@ -67,20 +67,69 @@ public class DetailActivity extends AppCompatActivity {
 
         //取出資料
 
+
+        //TEST 用 測試無用
+        //String petName=getIntent().getStringExtra("petName");
+
+        //Log.d("txtpetName ",""+txtpetName);
+
         String petName=getIntent().getStringExtra("petName");
-        String petKind=getIntent().getStringExtra("petKind");
-        String petAge=getIntent().getStringExtra("petAge");
-        String petSex=getIntent().getStringExtra("petSex");
-        String petType=getIntent().getStringExtra("petType");
-        String petCity=getIntent().getStringExtra("petCity");
-        String petArea=getIntent().getStringExtra("petArea");
-        String petAddress=getIntent().getStringExtra("petAddress");
-        String ownerName=getIntent().getStringExtra("ownerName");
-        String ownerTel=getIntent().getStringExtra("ownerTel");
-        String ownerLine=getIntent().getStringExtra("ownerLine");
-        String ownerEmail=getIntent().getStringExtra("ownerEmail");
-        String date=getIntent().getStringExtra("date");
-        String uri=getIntent().getStringExtra("uri");
+
+
+        //接收照片
+
+        PetData p = InquireActivity.dao.getStudent(petName);
+        ////本地端 抓照片位置
+        //接收照片
+
+               Glide.with(DetailActivity.this).load(p.uri).into(imagepic);
+
+        txtpetName.setText(p.petName);
+        txtpetKind.setText(p.petKind);
+        Log.d("test",p.petKind);
+        txtpetAge.setText(p.petAge);
+        txtpetSex.setText(p.petSex);
+        txtpetType.setText(p.petType);
+        txtpetCity.setText(p.petCity);
+        txtpetArea.setText(p.petArea);
+        txtpetAddress.setText(p.petAddress);
+        //主人資料
+        txtownerName.setText(p.ownerName);
+        txtownerTel.setText(p.ownerTel);
+        txtownerLine.setText(p.ownerLine);
+        txtownerEmail.setText(p.ownerEmail);
+        txtdate.setText(p.date);
+
+//
+//
+
+
+
+
+        //原本寫的程式
+//        String petName=getIntent().getStringExtra("petName");
+//        //Log.d("txtpetName ",""+txtpetName);
+//
+//        //接收照片
+//        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
+//        p = MainActivity.dao.getStudent(petName);
+
+
+
+//        String petName=getIntent().getStringExtra("petName");
+//        String petKind=getIntent().getStringExtra("petKind");
+//        String petAge=getIntent().getStringExtra("petAge");
+//        String petSex=getIntent().getStringExtra("petSex");
+//        String petType=getIntent().getStringExtra("petType");
+//        String petCity=getIntent().getStringExtra("petCity");
+//        String petArea=getIntent().getStringExtra("petArea");
+//        String petAddress=getIntent().getStringExtra("petAddress");
+//        String ownerName=getIntent().getStringExtra("ownerName");
+//        String ownerTel=getIntent().getStringExtra("ownerTel");
+//        String ownerLine=getIntent().getStringExtra("ownerLine");
+//        String ownerEmail=getIntent().getStringExtra("ownerEmail");
+//        String date=getIntent().getStringExtra("date");
+//        String uri=getIntent().getStringExtra("uri");
 
 
        // String petName=getIntent().getStringExtra("petName");
@@ -93,22 +142,22 @@ public class DetailActivity extends AppCompatActivity {
        // Glide.with(DetailActivity.this).load(p.uri).into(imagepic);
 
 
-
-        txtpetName.setText(petName);
-        txtpetKind.setText(petKind);
-        Log.d("test",petKind);
-        txtpetAge.setText(petAge);
-        txtpetSex.setText(petSex);
-        txtpetType.setText(petType);
-        txtpetCity.setText(petCity);
-        txtpetArea.setText(petArea);
-        txtpetAddress.setText(petAddress);
-        //主人資料
-        txtownerName.setText(ownerName);
-        txtownerTel.setText(ownerTel);
-        txtownerLine.setText(ownerLine);
-        txtownerEmail.setText(ownerEmail);
-        txtdate.setText(date);
+//
+//        txtpetName.setText(petName);
+//        txtpetKind.setText(petKind);
+//        Log.d("test",petKind);
+//        txtpetAge.setText(petAge);
+//        txtpetSex.setText(petSex);
+//        txtpetType.setText(petType);
+//        txtpetCity.setText(petCity);
+//        txtpetArea.setText(petArea);
+//        txtpetAddress.setText(petAddress);
+//        //主人資料
+//        txtownerName.setText(ownerName);
+//        txtownerTel.setText(ownerTel);
+//        txtownerLine.setText(ownerLine);
+//        txtownerEmail.setText(ownerEmail);
+//        txtdate.setText(date);
 
     }
 
@@ -118,4 +167,7 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(it);
         finish();
     }
+
+
+
 }
