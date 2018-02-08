@@ -149,7 +149,6 @@ public class InquireActivity extends AppCompatActivity {
 
 
 
-
     }
     //呈現要搜尋的資料
     public void showInquire(View v)
@@ -183,7 +182,7 @@ public class InquireActivity extends AppCompatActivity {
 
      Log.d("showdata","showdata");
         Inquirelist.clear();
-
+       //硬寫不是很好
         dao.getList().clear();
 
 //       //從FIREBASE 抓取全部資料過來
@@ -220,12 +219,15 @@ public class InquireActivity extends AppCompatActivity {
             if (okpetKind.equals(petKind) && okpetSex.equals(petSex) && okpetArea.equals(petArea)) {
                 //FIREBASE 下載下來的資料
                 //這裡是KEY 它是FIREBASE 下載下來 不是本地端的PetData類別資料
-                //TEST 都有跑出來
+                //TEST 都有跑出來   ****這裡要確定 一定每次都有跑出來 有東西 才可以抓值***
                 Inquirelist.add(oklist.get(i));
                // Log.d("oklist",""+oklist.size());
+                //確定有東西  跑出來~~
                 Log.d("Inquirelist",""+Inquirelist.size());
-
+               //硬寫不是很好
                 dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
+               Log.d("圖片--->",oklist.get(i).uri.toString());
+
 
 //                if(Inquirelist.size()==0)
 //                {
@@ -240,7 +242,6 @@ public class InquireActivity extends AppCompatActivity {
 
 
         }
-
 
         //listView 呈現畫面 它等於接上FIREBASE 的物件
         myadpter.arrayList=Inquirelist;
@@ -260,43 +261,41 @@ public class InquireActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView arg0, View arg1, int arg2,
-                                    long arg3) {
-//               // 按的是哪一個VIEW arg2
-//               // Log.d("arg2",""+arg2);
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                // 利用索引值取得點擊的項目內容。
+                         // 按的是哪一個VIEW arg2
+            Log.d("index",""+index);
         Intent it = new Intent(InquireActivity.this, DetailActivity.class);
-////                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
-        it.putExtra("petName",dao.getList().get(arg2).petName);
-
-
-
-                //TEST
-                //it.putExtra("petName",MainActivity.dao.getList().get(arg2).petName);
-
-//                //這裡也無法接 http
-//                it.putExtra("imageUri",Inquirelist.get(arg2).uri);
-//          it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
-/////
-//         it.putExtra("petName",Inquirelist.get(arg2).petName);
-//               // Log.d("petName--->",Inquirelist.get(arg2).petName);
-//
-//                it.putExtra("petKind",Inquirelist.get(arg2).petKind);
-//                it.putExtra("petAge",Inquirelist.get(arg2).petAge);
-//                it.putExtra("petSex",Inquirelist.get(arg2).petSex);
-//                it.putExtra("petType",Inquirelist.get(arg2).petType);
-//                it.putExtra("petCity",Inquirelist.get(arg2).petCity);
-//                it.putExtra("petArea",Inquirelist.get(arg2).petArea);
-//                it.putExtra("petAddress",Inquirelist.get(arg2).petAddress);
-//                it.putExtra("ownerName",Inquirelist.get(arg2).ownerName);
-//                it.putExtra("ownerTel",Inquirelist.get(arg2).ownerTel);
-//                it.putExtra("ownerLine",Inquirelist.get(arg2).ownerLine);
-//                it.putExtra("ownerEmail",Inquirelist.get(arg2).ownerEmail);
-//                it.putExtra("date",Inquirelist.get(arg2).date);
-
-                startActivity(it);
+             //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+       // it.putExtra("petName",dao.getList().get(index).petName);
+        it.putExtra("picUri",dao.getList().get(index).uri);
+        String ssuri =dao.getList().get(index).uri;
+        Log.d("ssuri",ssuri);
+        Log.d("index-->",""+index);
+        startActivity(it);
 
             }
         });
+
+
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapter, View arg1, int arg2,
+//                                    long arg3) {
+////               // 按的是哪一個VIEW arg2
+////               // Log.d("arg2",""+arg2);
+//        Intent it = new Intent(InquireActivity.this, DetailActivity.class);
+//////                //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
+//        it.putExtra("petName",dao.getList().get(arg2).petName);
+//        //it.putExtra("picUri",dao.getList().get(arg2).uri);
+//        String ssuri =dao.getList().get(arg2).uri;
+//        Log.d("ssuri",ssuri);
+//        Log.d("arg2-->",""+arg2);
+//        startActivity(it);
+//
+//            }
+//        });
 
 
     }

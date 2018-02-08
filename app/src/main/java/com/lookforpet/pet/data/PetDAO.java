@@ -46,11 +46,11 @@ public class PetDAO  implements  PetDAOControll{
 //    }
 
     //查詢
-    public PetData getStudent(String petName)
+    public PetData getStudent(String uri)
     {
         for(PetData s: mylist)
         {
-            if(s.petName.equals(petName))
+            if(s.uri.equals(uri))
             {
                 //回傳 PetData
                 return s;
@@ -58,6 +58,22 @@ public class PetDAO  implements  PetDAOControll{
         }
         return null;
     }
+
+
+
+//    //查詢
+//    public PetData getStudent(String petName)
+//    {
+//        for(PetData s: mylist)
+//        {
+//            if(s.petName.equals(petName))
+//            {
+//                //回傳 PetData
+//                return s;
+//            }
+//        }
+//        return null;
+//    }
 
     @Override
     public boolean update(PetData s) {

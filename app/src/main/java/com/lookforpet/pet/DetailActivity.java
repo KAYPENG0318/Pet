@@ -23,7 +23,6 @@ import java.net.URL;
 public class DetailActivity extends AppCompatActivity {
     //LAYOUT 資料填入
     ImageView imagepic;
-
     String petName ;
     String petKind ;
     String petAge ;
@@ -67,22 +66,23 @@ public class DetailActivity extends AppCompatActivity {
 
         //取出資料
 
-
         //TEST 用 測試無用
         //String petName=getIntent().getStringExtra("petName");
-
         //Log.d("txtpetName ",""+txtpetName);
+//        String petName=getIntent().getStringExtra("petName");
+//        Log.d("petName--> ",petName);
 
-        String petName=getIntent().getStringExtra("petName");
+        String picUri=getIntent().getStringExtra("picUri");
 
+        Log.d("picUri--> ",picUri);
 
         //接收照片
-
-        PetData p = InquireActivity.dao.getStudent(petName);
+        PetData p = InquireActivity.dao.getStudent(picUri);
         ////本地端 抓照片位置
         //接收照片
 
-               Glide.with(DetailActivity.this).load(p.uri).into(imagepic);
+        Glide.with(DetailActivity.this).load(p.uri).into(imagepic);
+        Log.d("圖片URI-->",""+p.uri);
 
         txtpetName.setText(p.petName);
         txtpetKind.setText(p.petKind);
@@ -100,11 +100,6 @@ public class DetailActivity extends AppCompatActivity {
         txtownerEmail.setText(p.ownerEmail);
         txtdate.setText(p.date);
 
-//
-//
-
-
-
 
         //原本寫的程式
 //        String petName=getIntent().getStringExtra("petName");
@@ -113,8 +108,6 @@ public class DetailActivity extends AppCompatActivity {
 //        //接收照片
 //        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
 //        p = MainActivity.dao.getStudent(petName);
-
-
 
 //        String petName=getIntent().getStringExtra("petName");
 //        String petKind=getIntent().getStringExtra("petKind");
