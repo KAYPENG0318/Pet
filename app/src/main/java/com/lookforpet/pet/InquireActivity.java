@@ -13,6 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.gson.Gson;
 import com.lookforpet.pet.data.PetDAO;
 import com.lookforpet.pet.data.PetData;
@@ -27,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class InquireActivity extends AppCompatActivity {
+    //private InterstitialAd mInterstitialAd;
     TextView txtpetName;
     TextView txtpetKind;
     TextView txtpetAge;
@@ -65,6 +69,9 @@ public class InquireActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //插頁式廣告
+        //loadInterstitialAd();
+
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_inquire);
 
@@ -76,9 +83,9 @@ public class InquireActivity extends AppCompatActivity {
         spkind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("有沒有來到這裡", "有沒有來到這裡");
+                //Log.d("有沒有來到這裡", "有沒有來到這裡");
                 spetKind = adapterView.getItemAtPosition(i).toString();
-                Log.d("有沒有_petKind", spetKind);
+                //Log.d("有沒有_petKind", spetKind);
 
             }
 
@@ -130,7 +137,7 @@ public class InquireActivity extends AppCompatActivity {
         String[] Citytype = new String[citys.length];
         for (int i = 0; i < citys.length; i++) {
             Citytype[i] = citys[i].CityName;
-            Log.d("Citytype---->", "" + Citytype[i]);
+            //Log.d("Citytype---->", "" + Citytype[i]);
         }
 
         //縣市
@@ -150,6 +157,33 @@ public class InquireActivity extends AppCompatActivity {
 
 
     }
+
+    //插頁式廣告
+//    private void loadInterstitialAd() {
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+//        mInterstitialAd.setAdListener(new AdListener() {
+//
+//            @Override
+//            public void onAdLoaded() {
+//                super.onAdLoaded();
+//                //Toast.makeText(InquireActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+//                if(mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                }
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int i) {
+//                super.onAdFailedToLoad(i);
+//                //Toast.makeText(InquireActivity.this, "onAdFailedToLoad()", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mInterstitialAd.loadAd(adRequest);
+//    }
+
     //呈現要搜尋的資料
     public void showInquire(View v)
     {
@@ -169,7 +203,7 @@ public class InquireActivity extends AppCompatActivity {
 
         }
 
-        Log.d("oklist--- ",""+oklist.size());
+        //Log.d("oklist--- ",""+oklist.size());
 
         showdata();
 
@@ -180,7 +214,7 @@ public class InquireActivity extends AppCompatActivity {
     public void showdata()
     {
 
-     Log.d("showdata","showdata");
+     //Log.d("showdata","showdata");
         Inquirelist.clear();
        //硬寫不是很好
         dao.getList().clear();
@@ -200,16 +234,16 @@ public class InquireActivity extends AppCompatActivity {
             String petCity=spetCity.trim();
             String petArea=spetArea.trim();
 
-            Log.d("okpetKind", okpetKind);
-            Log.d("okpetSex", okpetSex);
-            Log.d("okpetCity", okpetCity);
-            Log.d("okpetArea", okpetArea);
-            Log.d("ownername", ownername);
-
-            Log.d("petKind",petKind);
-            Log.d("petSex",petSex);
-            Log.d("petCity",petCity);
-            Log.d("petArea",petArea);
+//            Log.d("okpetKind", okpetKind);
+//            Log.d("okpetSex", okpetSex);
+//            Log.d("okpetCity", okpetCity);
+//            Log.d("okpetArea", okpetArea);
+//            Log.d("ownername", ownername);
+//
+//            Log.d("petKind",petKind);
+//            Log.d("petSex",petSex);
+//            Log.d("petCity",petCity);
+//            Log.d("petArea",petArea);
 
             //---------------------------------------------正確的資料------------------------------------------------
             //比對搜尋條件相同 放入ARRAYLIST
@@ -223,10 +257,10 @@ public class InquireActivity extends AppCompatActivity {
                 Inquirelist.add(oklist.get(i));
                // Log.d("oklist",""+oklist.size());
                 //確定有東西  跑出來~~
-                Log.d("Inquirelist",""+Inquirelist.size());
+                //Log.d("Inquirelist",""+Inquirelist.size());
                //硬寫不是很好
                 dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
-               Log.d("圖片--->",oklist.get(i).uri.toString());
+              // Log.d("圖片--->",oklist.get(i).uri.toString());
 
 
 //                if(Inquirelist.size()==0)
@@ -246,7 +280,7 @@ public class InquireActivity extends AppCompatActivity {
         //listView 呈現畫面 它等於接上FIREBASE 的物件
         myadpter.arrayList=Inquirelist;
 
-        Log.d("log",""+Inquirelist.get(0));
+        //Log.d("log",""+Inquirelist.get(0));
 
         //TEST 它也可以用喔~
         //adapter= new ImageListAdapter(InquireActivity.this,R.layout.myitem,  Inquirelist);
@@ -264,14 +298,14 @@ public class InquireActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 // 利用索引值取得點擊的項目內容。
                          // 按的是哪一個VIEW arg2
-            Log.d("index",""+index);
+           // Log.d("index",""+index);
         Intent it = new Intent(InquireActivity.this, DetailActivity.class);
              //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
        // it.putExtra("petName",dao.getList().get(index).petName);
         it.putExtra("picUri",dao.getList().get(index).uri);
         String ssuri =dao.getList().get(index).uri;
-        Log.d("ssuri",ssuri);
-        Log.d("index-->",""+index);
+        //Log.d("ssuri",ssuri);
+        //Log.d("index-->",""+index);
         startActivity(it);
 
             }
@@ -308,7 +342,7 @@ public class InquireActivity extends AppCompatActivity {
             spetCity =parent.getItemAtPosition(position).toString();
 
             //petCity =parent.getItemAtPosition(position).toString();
-            Log.d("petCity<------>",""+spetCity);
+            //Log.d("petCity<------>",""+spetCity);
 
             //讀取第一個下拉選單是選擇第幾個
             ArrayList<Map<String,String>> list = citys[position].AreaList;
@@ -320,9 +354,9 @@ public class InquireActivity extends AppCompatActivity {
             for(int i=0;i<list.size();i++)
             {
                 listname[i]=list.get(i).get("AreaName");
-                Log.d("AreaName--->  "," "+listname[i]);
+               // Log.d("AreaName--->  "," "+listname[i]);
             }
-            Log.d("LIST:" ,listname.toString());
+            //Log.d("LIST:" ,listname.toString());
 
 
             ArrayAdapter<String> choosearea = new ArrayAdapter<String>(InquireActivity.this,android.R.layout.simple_spinner_item,listname);

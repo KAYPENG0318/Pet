@@ -40,15 +40,15 @@
 
     <Spinner
         android:id="@+id/petSex"
-        android:layout_width="156dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="10dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/petKind"
-        android:textSize="24sp"/>
+        app:layout_constraintTop_toTopOf="@+id/petKind" />
 
     <TextView
         android:id="@+id/textView2"

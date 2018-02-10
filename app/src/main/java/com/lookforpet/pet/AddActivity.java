@@ -336,7 +336,6 @@ public class AddActivity extends AppCompatActivity {
             {
                 listname[i]=list.get(i).get("AreaName");
             }
-            Log.d("LIST:" ,listname.toString());
             ArrayAdapter<String> choosearea = new ArrayAdapter<String>(AddActivity.this,android.R.layout.simple_spinner_item,listname);
             spcity2.setAdapter(choosearea);
             spcity2.setOnItemSelectedListener(selectAR);

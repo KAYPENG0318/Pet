@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "832650945513-393blhkjp6q4934jf97arhnbh07vh71b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lookforpet.pet",
+            "certificate_hash": "a690e1269ed2b30a104bb8f5d27b5eee0799eba3"
+          }
+        },
+        {
           "client_id": "832650945513-1c3psspdb7ocvbbapauvi54r9i5ijoci.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
