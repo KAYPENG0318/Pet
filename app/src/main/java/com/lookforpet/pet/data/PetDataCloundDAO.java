@@ -118,7 +118,7 @@ public class PetDataCloundDAO implements PetDAOControll {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                       Toast.makeText(context,"Image uploaded", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(context,"Image uploaded", Toast.LENGTH_SHORT).show();
                        //寫進去 FIREBASE
                     //custom object  每按確定鈕 就建立一筆
                     //
