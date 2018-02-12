@@ -156,8 +156,8 @@ public class DetailActivity extends AppCompatActivity {
 
     public void buttonMain(View v)
     {
-        Intent it = new Intent(DetailActivity.this, MainActivity.class);
-        startActivity(it);
+//        Intent it = new Intent(DetailActivity.this, MainActivity.class);
+//        startActivity(it);
         finish();
     }
 

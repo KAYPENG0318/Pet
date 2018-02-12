@@ -43,6 +43,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class AddActivity extends AppCompatActivity {
 
+    boolean fastBack = false;
     EditText edpetName,edpetAge;
     EditText edownerName,edownerTel,edownerLine,edownerEmail;
     Spinner spkind,spsex,sptype;
@@ -283,6 +284,7 @@ public class AddActivity extends AppCompatActivity {
     //填好資料送到確定頁
     public void clickOk(View v)
     {
+        fastBack = true;
         if(suri==null)
         {
             Toast.makeText(AddActivity.this,"請選擇毛小孩照片",Toast.LENGTH_LONG).show();
@@ -364,4 +366,12 @@ public class AddActivity extends AppCompatActivity {
 
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(fastBack)
+        {
+            finish();
+        }
+    }
 }

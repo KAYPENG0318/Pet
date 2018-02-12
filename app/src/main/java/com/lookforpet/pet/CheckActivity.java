@@ -126,8 +126,9 @@ public class CheckActivity extends AppCompatActivity {
         // 加到 Clound 上  把etDataCloundDAO
         petDataCloundDAO.add(p);
         Toast.makeText(CheckActivity.this, "資料已送出", Toast.LENGTH_LONG).show();
-        Intent it =new Intent(CheckActivity.this,MainActivity.class);
-        startActivity(it);
+//送出須離開確認頁面，應直接finish()，所以不能用intent回首頁
+//        Intent it =new Intent(CheckActivity.this,MainActivity.class);
+//        startActivity(it);
         finish();
     }
 

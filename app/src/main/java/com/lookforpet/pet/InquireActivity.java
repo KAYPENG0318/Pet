@@ -35,6 +35,7 @@ public class InquireActivity extends AppCompatActivity {
     TextView txtpetKind;
     TextView txtpetAge;
     PetDataCloundDAO petDataCloundDAO;
+    boolean fastBack = false;
     public ArrayList<PetData> oklist=new ArrayList<>();
 
     //符合資料放這裡
@@ -188,6 +189,7 @@ public class InquireActivity extends AppCompatActivity {
     public void showInquire(View v)
     {
 
+        fastBack = true;
         if(petDataCloundDAO.list.size()==0)
         {
             Toast.makeText(InquireActivity.this, "資料正在下載中", Toast.LENGTH_LONG).show();
@@ -386,5 +388,12 @@ public class InquireActivity extends AppCompatActivity {
 
     };
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(fastBack)
+        {
+            finish();
+        }
+    }
 }
