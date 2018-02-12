@@ -318,7 +318,7 @@ public class AddActivity extends AppCompatActivity {
         Intent it = new Intent(AddActivity.this, CheckActivity.class);
         //取出 ARRAYLIST 內第一筆物件  抓出ARRAYLIST 裡的第一筆資 料寫法
         //MainActivity.dao.getList().get(0).petName
-        it.putExtra("petName",MainActivity.dao.getList().get(0).petName);
+        it.putExtra("picUri",MainActivity.dao.getList().get(0).uri);
 
         startActivity(it);
 

@@ -77,12 +77,11 @@ public class CheckActivity extends AppCompatActivity {
     public void  showDetail()
     {
 
-        String petName=getIntent().getStringExtra("petName");
-        //Log.d("txtpetName ",""+txtpetName);
+        String petpetUri=getIntent().getStringExtra("picUri");
 
         //接收照片
        // Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
-        p = MainActivity.dao.getStudent(petName);
+        p = MainActivity.dao.getStudent(petpetUri);
         ////本地端 抓照片位置
         String suri=p.uri;
         Log.d("suri--->",suri);
