@@ -102,7 +102,7 @@ public class PetDataCloundDAO implements PetDAOControll {
 
         //傳照片到 storageRef
         //字串轉為 URI
-        //FileUri =Uri.parse(uri);
+        FileUri =Uri.parse(uri);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference("uploadsimage");
