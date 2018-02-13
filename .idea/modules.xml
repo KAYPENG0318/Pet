@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Pet.iml" filepath="$PROJECT_DIR$/Pet.iml" />
-      <module fileurl="file://C:\JAVA\Pet\.idea\Pet.iml" filepath="C:\JAVA\Pet\.idea\Pet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Pet.iml" filepath="$PROJECT_DIR$/.idea/Pet.iml" />
       <module fileurl="file://C:\tmp\pet\.idea\Pet.iml" filepath="C:\tmp\pet\.idea\Pet.iml" />
       <module fileurl="file://C:\Pet\Pet\Pet.iml" filepath="C:\Pet\Pet\Pet.iml" />
+      <module fileurl="file://C:\JAVA\Pet\Pet.iml" filepath="C:\JAVA\Pet\Pet.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\projecct2018131\Pet\app\app.iml" filepath="C:\projecct2018131\Pet\app\app.iml" />
       <module fileurl="file://C:\projecct2018131\Pet\.idea\pet.iml" filepath="C:\projecct2018131\Pet\.idea\pet.iml" />
