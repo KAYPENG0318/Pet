@@ -127,10 +127,9 @@ public class CheckActivity extends AppCompatActivity {
         petDataCloundDAO.add(p);
         Toast.makeText(CheckActivity.this, "毛小孩資料已儲存", Toast.LENGTH_LONG).show();
 //送出須離開確認頁面，應直接finish()，所以不能用intent回首頁
+        Intent it =new Intent(CheckActivity.this,MainActivity.class);
+        startActivity(it);
         finish();
-//        Intent it =new Intent(CheckActivity.this,MainActivity.class);
-//        startActivity(it);
-
     }
 
 

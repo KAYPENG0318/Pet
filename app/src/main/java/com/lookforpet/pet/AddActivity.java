@@ -284,7 +284,7 @@ public class AddActivity extends AppCompatActivity {
     //填好資料送到確定頁
     public void clickOk(View v)
     {
-       fastBackadd = true;
+       //fastBackadd = true;
         if(suri==null)
         {
             Toast.makeText(AddActivity.this,"請選擇毛小孩照片",Toast.LENGTH_LONG).show();
@@ -323,6 +323,7 @@ public class AddActivity extends AppCompatActivity {
         it.putExtra("picUri",MainActivity.dao.getList().get(0).uri);
 
         startActivity(it);
+
 
     }
     //spinner第一個下拉類別的監看式
@@ -369,9 +370,9 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(fastBackadd)
-        {
-            finish();
-        }
+//        if(fastBackadd)
+//        {
+//            finish();
+//        }
     }
 }
