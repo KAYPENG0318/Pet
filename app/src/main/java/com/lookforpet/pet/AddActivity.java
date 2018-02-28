@@ -1,5 +1,6 @@
 package com.lookforpet.pet;
 
+
 import android.*;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -65,12 +66,16 @@ public class AddActivity extends AppCompatActivity {
     private File tempFile;
     Button btpic;
     ImageView imagepic;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide(); //隱藏標題
         setContentView(R.layout.activity_add);
+
+
 
         //spinner抓取JSON全台縣市與鄉鎮區域
         spcity=(Spinner)findViewById(R.id.petCity);

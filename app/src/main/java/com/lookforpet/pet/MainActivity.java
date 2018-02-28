@@ -1,7 +1,9 @@
 package com.lookforpet.pet;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    Activity prev;
     //插頁式廣告
     private InterstitialAd mInterstitialAd;
     //橫幅廣告

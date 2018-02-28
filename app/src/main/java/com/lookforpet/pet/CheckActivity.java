@@ -1,5 +1,6 @@
 package com.lookforpet.pet;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class CheckActivity extends AppCompatActivity {
+    Activity prev;
     ImageView imagepic;
     String petName ;
     String petKind ;
@@ -126,8 +128,11 @@ public class CheckActivity extends AppCompatActivity {
         // 加到 Clound 上  把etDataCloundDAO
         petDataCloundDAO.add(p);
         Toast.makeText(CheckActivity.this, "毛小孩資料已儲存", Toast.LENGTH_LONG).show();
-//送出須離開確認頁面，應直接finish()，所以不能用intent回首頁
+
+
+
         Intent it =new Intent(CheckActivity.this,MainActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以關掉所要到的界面中间的activity
         startActivity(it);
         finish();
     }
