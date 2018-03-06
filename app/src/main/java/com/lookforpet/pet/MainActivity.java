@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //插頁式廣告
         mInterstitialAd = new InterstitialAd(MainActivity.this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        //mInterstitialAd.setAdUnitId("ca-app-pub-4106572104985577/4129383097");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 

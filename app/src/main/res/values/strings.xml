@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">尋找汪喵星人</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_idTEST">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4106572104985577/6225946242</string>
     <string-array name="kind">
         <item>犬</item>
         <item>貓</item>
@@ -19,7 +20,7 @@
         尋找汪喵星人
     </string>
     <string name="mainText1">
-        *定期二個月會自動刪除資訊，如有需要請自行再更新。
+        *定期每月2號刪除前二個月的資訊，如有需要請自行再更新。
     </string>
     <string name="mainText2">
         *請勿新增非找尋貓貓狗狗失蹤資訊，發現一律刪除。
