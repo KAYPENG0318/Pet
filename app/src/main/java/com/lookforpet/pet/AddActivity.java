@@ -76,7 +76,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
 
-
         //spinner抓取JSON全台縣市與鄉鎮區域
         spcity=(Spinner)findViewById(R.id.petCity);
         spcity2=(Spinner)findViewById(R.id.petArea);
