@@ -105,13 +105,18 @@ public class PetDataCloundDAO implements PetDAOControll {
         FileUri =Uri.parse(uri);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference("uploadsimage");
+        //StorageReference storageRef = storage.getReference("uploadsimage");
+       // String str="image/" + String.valueOf(new java.util.Date().getTime());
+
+        storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
         String str="image/" + String.valueOf(new java.util.Date().getTime());
 
         if(FileUri!=null)
         {
             //取得 the storage  reference
-            StorageReference riversRef = storageRef.child(System.currentTimeMillis()+"."+uri);
+            //StorageReference riversRef = storageRef.child(System.currentTimeMillis()+"."+uri);
+            StorageReference riversRef = storageRef.child(str);
 
             //add file to reference
             riversRef.putFile(FileUri)

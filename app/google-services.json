@@ -8,12 +8,64 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:832650945513:android:90f102c0d654d06c",
+        "android_client_info": {
+          "package_name": "com.example.givemepss.firebasestoragedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832650945513-7qshu6ct9f0295ooamudbu7c2rj2s2v1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.givemepss.firebasestoragedemo",
+            "certificate_hash": "8a457b41bda928d732b9a172d754b7d15afe23bf"
+          }
+        },
+        {
+          "client_id": "832650945513-ntn8v6hd021ek1cpku9llhn03n73e3kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUdZfV2DU7kgQZ6LN5KcJUSUuQongv0p0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832650945513-ntn8v6hd021ek1cpku9llhn03n73e3kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:832650945513:android:c0c5500c5974bfbb",
         "android_client_info": {
           "package_name": "com.lookforpet.pet"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "832650945513-5f62f3grkoc2qv640bul1m0sm76seakr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lookforpet.pet",
+            "certificate_hash": "8a457b41bda928d732b9a172d754b7d15afe23bf"
+          }
+        },
         {
           "client_id": "832650945513-393blhkjp6q4934jf97arhnbh07vh71b.apps.googleusercontent.com",
           "client_type": 1,
@@ -36,6 +88,58 @@
           "android_info": {
             "package_name": "com.lookforpet.pet",
             "certificate_hash": "2f57bbe4cd3e96b3c41b609eb0ae37006b472914"
+          }
+        },
+        {
+          "client_id": "832650945513-ntn8v6hd021ek1cpku9llhn03n73e3kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUdZfV2DU7kgQZ6LN5KcJUSUuQongv0p0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832650945513-ntn8v6hd021ek1cpku9llhn03n73e3kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832650945513:android:453222cdc3e871a2",
+        "android_client_info": {
+          "package_name": "pet.delete.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832650945513-n7ql512pg3s3e2fkmsistqeo25p5ga9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pet.delete.com",
+            "certificate_hash": "8a457b41bda928d732b9a172d754b7d15afe23bf"
+          }
+        },
+        {
+          "client_id": "832650945513-bnupli8t9r4a3hdkau35dfh0aqcu246r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pet.delete.com",
+            "certificate_hash": "4d24c2c8970d6a65d9f7621c4ac7c5284448b4ad"
           }
         },
         {
