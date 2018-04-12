@@ -18,6 +18,8 @@ public class PetData {
    // public Uri
 
     //user 輸入只會有一筆
+    public String id;
+
     public  String petName;
     public  String petKind;
     public  String petAge;

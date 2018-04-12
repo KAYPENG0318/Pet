@@ -21,6 +21,7 @@ import com.google.firebase.storage.UploadTask;
 import com.lookforpet.pet.InquireActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by Student on 2018/1/23.
@@ -32,7 +33,6 @@ public class PetDataCloundDAO implements PetDAOControll {
 
     //存符合條 件的地方 位何檔都可以存取它
     //public  ArrayList<PetData> okmylist;
-
     //從FIREBASE 取出資料
     public static  ArrayList<PetData> list;
 
@@ -51,6 +51,10 @@ public class PetDataCloundDAO implements PetDAOControll {
     //處理圖片
     Uri FileUri;
 
+    //接刪除資料
+    public static  ArrayList<PetData> onlydata;
+
+
 
     public PetDataCloundDAO(final Context context)
     {
@@ -64,7 +68,7 @@ public class PetDataCloundDAO implements PetDAOControll {
         //預防一開始app沒給值
         mylist = new ArrayList<>();
         //預設先要空間
-        //okmylist= new ArrayList<>();
+        //onlydata= new ArrayList<>();
         list=new ArrayList<>();
 
     }
@@ -78,7 +82,6 @@ public class PetDataCloundDAO implements PetDAOControll {
         saveFile();
         return true;
     }
-
 
     //Write a message to the database
     private void saveFile()
@@ -104,7 +107,7 @@ public class PetDataCloundDAO implements PetDAOControll {
         //字串轉為 URI
         FileUri =Uri.parse(uri);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+       // FirebaseStorage storage = FirebaseStorage.getInstance();
         //StorageReference storageRef = storage.getReference("uploadsimage");
        // String str="image/" + String.valueOf(new java.util.Date().getTime());
 
@@ -126,7 +129,6 @@ public class PetDataCloundDAO implements PetDAOControll {
 //                       Toast.makeText(context,"Image uploaded", Toast.LENGTH_SHORT).show();
                        //寫進去 FIREBASE
                     //custom object  每按確定鈕 就建立一筆
-                    //
                     String loadurl=taskSnapshot.getDownloadUrl().toString();
                     // ----- http
                     Log.d("loadurl---->",loadurl);
@@ -176,6 +178,9 @@ public class PetDataCloundDAO implements PetDAOControll {
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     //FIREBASE 裡取出來的資料
                     PetData note = noteDataSnapshot.getValue(PetData.class);
+                    note.id=noteDataSnapshot.getKey().toString();
+
+
                     //OK  這邊可以接
                     list.add(note);
                     Log.d("PDAlistsize-->", "" + list.size());
@@ -190,10 +195,7 @@ public class PetDataCloundDAO implements PetDAOControll {
             }
         });
 
-
-
     }
-
 
 
     @Override
@@ -211,7 +213,6 @@ public class PetDataCloundDAO implements PetDAOControll {
     {
         return list ;
     }
-
 
     @Override
     public PetData getStudent(String petName) {

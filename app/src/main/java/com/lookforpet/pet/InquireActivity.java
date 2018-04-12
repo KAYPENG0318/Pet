@@ -155,8 +155,6 @@ public class InquireActivity extends AppCompatActivity {
 
         myadpter = new Myadpter(InquireActivity.this);
 
-
-
     }
 
     //插頁式廣告
@@ -188,8 +186,9 @@ public class InquireActivity extends AppCompatActivity {
     //呈現要搜尋的資料
     public void showInquire(View v)
     {
-
         fastBack = true;
+
+        //原本程式碼
         if(petDataCloundDAO.list.size()==0)
         {
             Toast.makeText(InquireActivity.this, "資料正在下載中", Toast.LENGTH_LONG).show();
@@ -205,7 +204,7 @@ public class InquireActivity extends AppCompatActivity {
 
         }
 
-        //Log.d("oklist--- ",""+oklist.size());
+        Log.d("oklist--- ",""+oklist.size());
 
         showdata();
 
@@ -236,16 +235,6 @@ public class InquireActivity extends AppCompatActivity {
             String petCity=spetCity.trim();
             String petArea=spetArea.trim();
 
-//            Log.d("okpetKind", okpetKind);
-//            Log.d("okpetSex", okpetSex);
-//            Log.d("okpetCity", okpetCity);
-//            Log.d("okpetArea", okpetArea);
-//            Log.d("ownername", ownername);
-//
-//            Log.d("petKind",petKind);
-//            Log.d("petSex",petSex);
-//            Log.d("petCity",petCity);
-//            Log.d("petArea",petArea);
 
             //---------------------------------------------正確的資料------------------------------------------------
             //比對搜尋條件相同 放入ARRAYLIST
@@ -256,33 +245,34 @@ public class InquireActivity extends AppCompatActivity {
                 //FIREBASE 下載下來的資料
                 //這裡是KEY 它是FIREBASE 下載下來 不是本地端的PetData類別資料
                 //TEST 都有跑出來   ****這裡要確定 一定每次都有跑出來 有東西 才可以抓值***
+
                 Inquirelist.add(oklist.get(i));
-               // Log.d("oklist",""+oklist.size());
-                //確定有東西  跑出來~~
-                //Log.d("Inquirelist",""+Inquirelist.size());
-               //硬寫不是很好
-                dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
-              // Log.d("圖片--->",oklist.get(i).uri.toString());
 
-
-//                if(Inquirelist.size()==0)
-//                {
-//                    Toast.makeText(InquireActivity.this, "資料正在下載中", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//
-//                //FIREBASE 裡資料放在本地端
-//                dao.add(new PetData(Inquirelist.get(i).uri,Inquirelist.get(i).petName,Inquirelist.get(i).petKind,Inquirelist.get(i).petAge,Inquirelist.get(i).petSex, Inquirelist.get(i).petType,Inquirelist.get(i).petCity,Inquirelist.get(i).petArea,Inquirelist.get(i).petAddress,Inquirelist.get(i).ownerName,Inquirelist.get(i).ownerTel,Inquirelist.get(i).ownerLine,Inquirelist.get(i).ownerEmail,Inquirelist.get(i).date));
+                Log.d("id",oklist.get(i).id);
 
             }
 
+        }
 
+        //2018 4 12
+        // 條件下來 的資料 有重覆的刪除掉
+        for (int i = 0; i < Inquirelist.size()-1; i++) {
+            for (int j = Inquirelist.size()-1; j > i; j--) {
+                if (Inquirelist.get(j).id.equals(Inquirelist.get(i).id)) {
+                    Inquirelist.remove(j);
+                }
+            }
+
+            Log.d("Inquirelist",""+Inquirelist.size());
+            //沒有重覆的資料 建立成物件
+            for(int k=0; k< Inquirelist.size(); k++)
+            {
+                dao.add(new PetData(oklist.get(k).uri,oklist.get(k).petName,oklist.get(k).petKind,oklist.get(k).petAge,oklist.get(k).petSex, oklist.get(k).petType,oklist.get(k).petCity,oklist.get(k).petArea,oklist.get(k).petAddress,oklist.get(k).ownerName,oklist.get(k).ownerTel,oklist.get(k).ownerLine,oklist.get(k).ownerEmail,oklist.get(k).date));
+            }
         }
 
         //listView 呈現畫面 它等於接上FIREBASE 的物件
         myadpter.arrayList=Inquirelist;
-
-        //Log.d("log",""+Inquirelist.get(0));
 
         //TEST 它也可以用喔~
         //adapter= new ImageListAdapter(InquireActivity.this,R.layout.myitem,  Inquirelist);
@@ -290,10 +280,6 @@ public class InquireActivity extends AppCompatActivity {
 
        listView.setAdapter(myadpter);
 
-       //很奇怪的寫法 硬寫的   Inquirelist已是 物件 給予dao.mylist 為了取出 放在 ArrayList內的PetDATA物件
-        //REFERENCE FIREBASE
-        //TEST 是不行的
-       // MainActivity.dao.mylist =Inquirelist;
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
