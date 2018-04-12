@@ -45,7 +45,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 public class AddActivity extends AppCompatActivity {
 
     boolean fastBackadd = false;
-    EditText edpetName,edpetAge;
+    EditText edpetName,edpetAge,edpetAddress;
     EditText edownerName,edownerTel,edownerLine,edownerEmail;
     Spinner spkind,spsex,sptype;
     String petSex;
@@ -169,6 +169,10 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
+
+        //失蹤詳細地址
+        edpetAddress=(EditText)findViewById(R.id.petAddress);
+
 
 
         //飼主資料
@@ -299,6 +303,9 @@ public class AddActivity extends AppCompatActivity {
         petName = edpetName.getText().toString();
         Log.d("-<-petName-->",petName);
         petAge=edpetAge.getText().toString();
+        // 失蹤地點
+
+        petAddress=edpetAddress.getText().toString();
         ownerName=edownerName.getText().toString();
         ownerTel=edownerTel.getText().toString();
         ownerLine=edownerLine.getText().toString();

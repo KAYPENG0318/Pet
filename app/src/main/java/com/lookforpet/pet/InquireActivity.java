@@ -208,7 +208,6 @@ public class InquireActivity extends AppCompatActivity {
 
         showdata();
 
-
     }
 
     //清掉之前 選的資料  ARRAYLIST 裡面的資料 重新來一次
@@ -250,6 +249,8 @@ public class InquireActivity extends AppCompatActivity {
 
                 Log.d("id",oklist.get(i).id);
 
+                //dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
+
             }
 
         }
@@ -264,11 +265,13 @@ public class InquireActivity extends AppCompatActivity {
             }
 
             Log.d("Inquirelist",""+Inquirelist.size());
-            //沒有重覆的資料 建立成物件
-            for(int k=0; k< Inquirelist.size(); k++)
-            {
-                dao.add(new PetData(oklist.get(k).uri,oklist.get(k).petName,oklist.get(k).petKind,oklist.get(k).petAge,oklist.get(k).petSex, oklist.get(k).petType,oklist.get(k).petCity,oklist.get(k).petArea,oklist.get(k).petAddress,oklist.get(k).ownerName,oklist.get(k).ownerTel,oklist.get(k).ownerLine,oklist.get(k).ownerEmail,oklist.get(k).date));
-            }
+
+        }
+
+        //沒有重覆的資料 建立成物件 2018 4 12 TEST
+        for(int k=0; k< Inquirelist.size(); k++)
+        {
+            dao.add(new PetData(Inquirelist.get(k).uri,Inquirelist.get(k).petName,Inquirelist.get(k).petKind,Inquirelist.get(k).petAge,Inquirelist.get(k).petSex, Inquirelist.get(k).petType,Inquirelist.get(k).petCity,Inquirelist.get(k).petArea,Inquirelist.get(k).petAddress,Inquirelist.get(k).ownerName,Inquirelist.get(k).ownerTel,Inquirelist.get(k).ownerLine,Inquirelist.get(k).ownerEmail,Inquirelist.get(k).date));
         }
 
         //listView 呈現畫面 它等於接上FIREBASE 的物件
