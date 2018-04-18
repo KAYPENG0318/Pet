@@ -96,7 +96,6 @@ public class InquireActivity extends AppCompatActivity {
             }
         });
 
-
         //下拉式選單：性別
         Spinner spsex = (Spinner) findViewById(R.id.petSex);
         ArrayAdapter<CharSequence> choosesex = ArrayAdapter.createFromResource(InquireActivity.this,
@@ -234,7 +233,6 @@ public class InquireActivity extends AppCompatActivity {
             String petCity=spetCity.trim();
             String petArea=spetArea.trim();
 
-
             //---------------------------------------------正確的資料------------------------------------------------
             //比對搜尋條件相同 放入ARRAYLIST
             // 台北市 大同區 貓 雌--2
@@ -250,7 +248,6 @@ public class InquireActivity extends AppCompatActivity {
                 Log.d("id",oklist.get(i).id);
 
                 //dao.add(new PetData(oklist.get(i).uri,oklist.get(i).petName,oklist.get(i).petKind,oklist.get(i).petAge,oklist.get(i).petSex, oklist.get(i).petType,oklist.get(i).petCity,oklist.get(i).petArea,oklist.get(i).petAddress,oklist.get(i).ownerName,oklist.get(i).ownerTel,oklist.get(i).ownerLine,oklist.get(i).ownerEmail,oklist.get(i).date));
-
             }
 
         }
@@ -267,6 +264,14 @@ public class InquireActivity extends AppCompatActivity {
             Log.d("Inquirelist",""+Inquirelist.size());
 
         }
+
+        //查詢無資料
+        if(Inquirelist.size()==0)
+        {
+            Toast.makeText(InquireActivity.this, "此區域無資料", Toast.LENGTH_LONG).show();
+        }
+
+
 
         //沒有重覆的資料 建立成物件 2018 4 12 TEST
         for(int k=0; k< Inquirelist.size(); k++)
